@@ -5,12 +5,13 @@ import json
 app = Flask(__name__)
 CORS(app)
 have = 0
+users = []
 
 
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "GET":
-        return jsonify({"status": True, "message": "Hello, World!(Updated)"})  # ✅ исправлено
+        return jsonify({"status": True, "message": "HellosWorld!(Updated)"})  # ✅ исправлено
 
     elif request.method == "POST":
         data = request.json
@@ -46,7 +47,16 @@ def users():
     
     else:
         return jsonify({"message": "unknown"})
-                
+
+
+@app.route("/register/", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        data = request.json
+        return jsonify({"username": data.username})
+    
+    else:
+        return jsonify({"status": 200})
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
