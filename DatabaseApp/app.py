@@ -10,7 +10,7 @@ have = 0
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "GET":
-        return jsonify({"status": True, "message": "Hello, World!"})  # ✅ исправлено
+        return jsonify({"status": True, "message": "Hello, World!(Updated)"})  # ✅ исправлено
 
     elif request.method == "POST":
         data = request.json

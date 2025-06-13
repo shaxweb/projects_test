@@ -9,17 +9,17 @@
 
 <script>
 
-const apiUrl = "https://shaxweb-database.onrender.com/api/users/"
+const apiUrl = "https://shaxweb-database.onrender.com/"
 
 fetch(apiUrl)
-.then(response => {
-  if (response.ok) {
-    const data = response.json()
-    console.log(data)
-  } else {
-    alert(response.status)
-  }
+.then(response => response.json())
+.then(data => {
+  console.log(data)
 })
+
+fetch(`${apiUrl}/api/users/`)
+.then(response => response.json())
+.then(data => {console.log(data)})
 
 </script>
 </body>
