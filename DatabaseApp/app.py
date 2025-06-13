@@ -12,6 +12,7 @@ def home():
     if request.method == "POST":
         data = request.json
         user = {"username": data.get("username"), "password": data.get("password")}
+        sql.register(user["username"], user["password"])
         return jsonify({"status": True, "message": "Successfully Saved!"})
         
     return render("index.html", name="Shaxrux")
