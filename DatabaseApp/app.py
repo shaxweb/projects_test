@@ -11,6 +11,10 @@ CORS(app)
 def home():
     if request.method == "POST":
         data = request.json
+        if data.get("type") == "get_users":
+            users = sql.get_users()
+            return jsonify("status": True, "data": json.dumps(users))
+            
         user = {"username": data.get("username"), "password": data.get("password")}
         sql.register(user["username"], user["password"])
         return jsonify({"status": True, "message": "Successfully Saved!"})
