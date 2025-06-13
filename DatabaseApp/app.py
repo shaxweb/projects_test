@@ -15,6 +15,8 @@ def home():
         with open("datas.json", "w") as file:
             json.dump(data, file, indent=4)  # ✅ записываем как JSON, а не просто text
         return jsonify({"status": True, "message": "Saved!"})
+    else:
+        return jsonify({"message": "unknown"})
 
 
 @app.route("/api/users/", methods=["GET", "POST"])
@@ -39,6 +41,9 @@ def users():
             file.write(users, file, indent=4)
         
         return jsonify({"status": True})
+    
+    else:
+        return jsonify({"message": "unknown"})
                 
 
 if __name__ == '__main__':
