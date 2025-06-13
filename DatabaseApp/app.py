@@ -7,10 +7,11 @@ render = render_template
 CORS(app)
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def home():
-    # if request.method == "GET":
-        # return jsonify({"status": True, "message": "Hello, World"})
+    if request.method == "POST":
+        data = response.json
+        return jsonify({"status": True, "message": f"Thanks for {data}"})
     return render("index.html", name="Shaxrux")
 
 if __name__ == '__main__':
