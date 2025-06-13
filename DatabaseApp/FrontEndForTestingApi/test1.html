@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+<body>
+
+<script>
+
+const apiUrl = "https://shaxweb-database.onrender.com/api/users/"
+
+fetch(apiUrl)
+.then(response => {
+  if (response.ok) {
+    const data = response.json()
+    console.log(data)
+  } else {
+    alert(response.status)
+  }
+})
+
+</script>
+</body>
+</html>
