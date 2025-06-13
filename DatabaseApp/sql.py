@@ -1,20 +1,24 @@
 import sqlite3 as sql
 
-db = sql.connect("data.db")
-cur = db.cursor()
+# Создание таблицы — можно оставить глобально
+with sql.connect("data.db") as db:
+    cur = db.cursor()
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS users(
+      id INTEGER PRIMARY KEY,
+      username TEXT,
+      password TEXT
+    )""")
+    db.commit()
 
-cur.execute("""
-CREATE TABLE IF NOT EXISTS users(
-  id INTEGER PRIMARY KEY,
-  username TEXT,
-  password TEXT
-)""")
-
-
+# Всегда создавать новое подключение внутри функции
 def register(username, password):
-  cur.execute("INSERT INTO users(username, password) VALUES(?,?)", (username, password))
-  db.commit()
-
+    with sql.connect("data.db") as db:
+        cur = db.cursor()
+        cur.execute("INSERT INTO users(username, password) VALUES(?, ?)", (username, password))
+        db.commit()
 
 def get_users():
-  return cur.execute("SELECT * FROM users").fetchall()
+    with sql.connect("data.db") as db:
+        cur = db.cursor()
+        return cur.execute("SELECT * FROM users").fetchall()

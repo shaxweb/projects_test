@@ -13,7 +13,7 @@ const apiUrl = "https://shaxweb-database.onrender.com/"
 fetch(apiUrl, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({message: "Hello"})
+  body: JSON.stringify({username: "shaxcoder", password: "thepw"})
 })
 .then(response => response.json())
 .then(data => {
