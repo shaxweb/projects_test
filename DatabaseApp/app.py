@@ -9,6 +9,8 @@ CORS(app)
 
 @app.route("/")
 def home():
+    if request.method == "GET":
+        return jsonify({"status": True, "message": "Hello, World"})
     return render("index.html", name="Shaxrux")
 
 if __name__ == '__main__':
