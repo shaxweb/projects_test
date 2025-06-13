@@ -53,7 +53,7 @@ def users():
 def register():
     if request.method == "POST":
         data = request.json
-        return jsonify({"username": data.username})
+        return jsonify({"username": data["username"]})
     
     else:
         return jsonify({"status": 200})
