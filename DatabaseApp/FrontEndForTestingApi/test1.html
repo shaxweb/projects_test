@@ -10,7 +10,11 @@
 <script>
 const apiUrl = "https://shaxweb-database.onrender.com/"
 
-fetch(apiUrl)
+fetch(apiUrl, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({message: "Hello"})
+})
 .then(response => response.json())
 .then(data => {
   console.log(data)

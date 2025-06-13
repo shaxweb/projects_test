@@ -10,7 +10,7 @@ CORS(app)
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "POST":
-        data = response.json
+        data = requests.json
         return jsonify({"status": True, "message": f"Thanks for {data}"})
     return render("index.html", name="Shaxrux")
 
