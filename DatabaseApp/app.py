@@ -11,7 +11,7 @@ users = []
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "GET":
-        return jsonify({"status": True, "message": "HellosWorld!(Updated)"})  # ✅ исправлено
+        return jsonify({"status": True, "message": "HellosWorld!"})  # ✅ исправлено
 
     elif request.method == "POST":
         data = request.json
