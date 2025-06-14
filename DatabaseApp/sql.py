@@ -1,7 +1,6 @@
 import sqlite3 as sql
 
-# Создание таблицы — можно оставить глобально
-with sql.connect("templates/data.db") as db:
+with sql.connect("data.db") as db:
     cur = db.cursor()
     cur.execute("""
     CREATE TABLE IF NOT EXISTS users(
@@ -11,14 +10,15 @@ with sql.connect("templates/data.db") as db:
     )""")
     db.commit()
 
-# Всегда создавать новое подключение внутри функции
+
 def register(username, password):
-    with sql.connect("templates/data.db") as db:
+    with sql.connect("data.db") as db:
         cur = db.cursor()
         cur.execute("INSERT INTO users(username, password) VALUES(?, ?)", (username, password))
         db.commit()
 
+
 def get_users():
-    with sql.connect("templates/data.db") as db:
+    with sql.connect("data.db") as db:
         cur = db.cursor()
         return cur.execute("SELECT * FROM users").fetchall()
