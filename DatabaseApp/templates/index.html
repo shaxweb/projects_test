@@ -11,7 +11,7 @@
     <a href="../download_data.html">Download base date</a>
     <h3>{{ coords }}</h3>
     {% for i in coords %}
-        <a href="https://www.google.com/maps/@{{i.lat}},{{i.lng}},15z" target="_blank">{{ i }}</a>
+        <a href="https://www.google.com/maps/@{{i.lat}},{{i.lng}},15z" target="_blank">{{ i.user }}</a>
     {% endfor %}
     
     <h2>Updated at 14.06.2025 2.09</h2>
