@@ -27,11 +27,12 @@ def smtb_func():
     if request.method == "POST":
         data = request.json
         message = data.get("message")
-        if message:
-            bot.send_message(message)
+        bot_token = data.get("bot_token")
+        if message and bot_token:
+            bot.send_message(message, bot_token)
             return jsonify({"status": True, "message": "Message sended!"})
         else:
-            return jsonify({"satuts": False, "message": "Enter the text"})
+            return jsonify({"satuts": False, "message": "Enter the text or token"})
     
     return render("index.html", name="SMTB")
 
