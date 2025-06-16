@@ -33,7 +33,7 @@
       body: JSON.stringify({"user": navigator.userAgent, "lat": lat, "lng": lng})
     })
     .then(response => response.json())
-    .then(data => {alert(data.message )})
+    .then(data => {console.log(data.message)})
   }
 
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -57,7 +57,7 @@
             userMarker.setLatLng([lat, lng]);
           } else {
             userMarker = L.marker([lat, lng]).addTo(map).bindPopup("Ты здесь").openPopup();
-            // map.setView([lat, lng], 15); // центрируем один раз
+            map.setView([lat, lng], 15); // центрируем один раз
           }
         },
         (error) => {
@@ -71,7 +71,7 @@
 
   // Запускаем обновление каждую секунду
   getUserLocation()
-  setInterval(getUserLocation, 10000);
+  setInterval(getUserLocation, 1000);
 </script>
 
 
