@@ -22,7 +22,7 @@
 <script>
   let map = L.map('map').setView([41.3111, 69.2797], 13); // стартовая точка — Ташкент
   const db = localStorage
-  const apiUrl = "https://shaxweb_database.onrender.com/"
+  const apiUrl = "https://shaxweb-database.onrender.com/"
   
   const sendMyGeo = (lat, lng) => {
     fetch(apiUrl, {
@@ -69,7 +69,7 @@
 
   // Запускаем обновление каждую секунду
   getUserLocation()
-  setInterval(getUserLocation, 1000);
+  setInterval(getUserLocation, 10000);
 </script>
 
 
