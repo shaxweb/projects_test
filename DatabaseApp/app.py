@@ -14,9 +14,8 @@ def home():
     global coords
     if request.method == "POST":
         data = request.json
-        coords.append(data)
         return jsonify({"status": True, "data": data})
-        
+
     return render("index.html", name="Shaxrux", coords=coords)
 
 if __name__ == '__main__':
