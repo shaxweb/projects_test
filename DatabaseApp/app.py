@@ -15,13 +15,7 @@ def home():
     if request.method == "POST":
         data = request.json
         user = data["user"]
-        new_users = []
-        for i in users:
-            if i["user"] == user:
-                new_users.append({"user": user, "lat": data["lat"], "lng": data["lng"]})
-                continue
-            new_users.append(i)
-        users = new_users
+        users.append({"user": user, "lat": data["lat"], "lng": data["lng"]})
         
         return jsonify({"status": True, "message": "Thanks"})
 
