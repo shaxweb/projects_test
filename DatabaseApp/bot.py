@@ -13,4 +13,4 @@ def send_message(message, bot_token):
     return response.json()
 
 # Пример использования
-send_message("Hello from requests!")
+# send_message("Hello from requests!")
