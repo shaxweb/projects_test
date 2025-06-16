@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Super Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- Leaflet Routing Machine -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+  <!-- Leaflet Control Geocoder -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+  <style>
+    html, body, #map {
+      height: 100%;
+      margin: 0;
+    }
+    .leaflet-routing-container {
+      background: rgba(255, 255, 255, 0.9);
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<!-- Routing machine -->
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.min.js"></script>
+<!-- Geocoder -->
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<!-- Locate plugin -->
+<script src="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
+
+<script>
+  // Инициализация карты
+  const map = L.map('map').setView([41.3111, 69.2797], 13); // Ташкент по умолчанию
+
+  // Основной слой карты (OSM)
+  const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Спутниковый слой (Esri)
+  const esriSat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: '© Esri'
+  });
+
+  // Контроль слоев
+  L.control.layers({
+    "OpenStreetMap": osm,
+    "Спутник (Esri)": esriSat
+  }).addTo(map);
+
+  // Кнопка геолокации
+  L.control.locate().addTo(map);
+
+  // Геокодер (поиск по адресу)
+  L.Control.geocoder().addTo(map);
+
+  // Добавление маршрута между двумя точками (можно кликать)
+  const control = L.Routing.control({
+    waypoints: [],
+    routeWhileDragging: true,
+    geocoder: L.Control.Geocoder.nominatim(),
+  }).addTo(map);
+
+  // Клик по карте для добавления маркера
+  map.on('click', function(e) {
+    const latlng = e.latlng;
+    L.marker(latlng).addTo(map)
+      .bindPopup(`Координаты: ${latlng.lat.toFixed(5)}, ${latlng.lng.toFixed(5)}`)
+      .openPopup();
+  });
+
+</script>
+
+</body>
+</html>

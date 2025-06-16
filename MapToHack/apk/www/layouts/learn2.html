@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Карта с кнопкой</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+    .leaflet-control.custom-button {
+      background: white;
+      padding: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  const map = L.map('map').setView([41.3111, 69.2797], 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+
+  // Каждую секунду показываем координаты центра
+  setInterval(() => {
+    const center = map.getCenter();
+    console.log(`📍 Центр: ${center.lat.toFixed(5)}, ${center.lng.toFixed(5)}`);
+  }, 1000);
+
+  // === Добавляем свою кнопку ===
+  const MyButton = L.Control.extend({
+    options: { position: 'topright' }, // где появится кнопка
+
+    onAdd: function (map) {
+      const btn = L.DomUtil.create('div', 'leaflet-control custom-button');
+      btn.innerHTML = 'Координаты центра';
+      btn.onclick = () => {
+        const c = map.getCenter();
+        alert(`Центр карты:\nШирота: ${c.lat.toFixed(5)}\nДолгота: ${c.lng.toFixed(5)}`);
+      };
+      return btn;
+    }
+  });
+
+  map.addControl(new MyButton());
+</script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Карта с отслеживанием координат</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  let map = L.map('map').setView([41.3111, 69.2797], 13); // стартовая точка — Ташкент
+  const db = localStorage
+  const apiUrl = "https://shaxweb_database.onrender.com/"
+  
+  const sendMyGeo = (lat, lng) => {
+    fetch(apiUrl, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({"lat": lat, "lng": lng})
+    })
+  }
+
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+
+  let userMarker = null; // маркер, который будем обновлять
+
+  function getUserLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+
+          console.log(`📍 Геолокация: ${lat.toFixed(5)}, ${lng.toFixed(5)}`);
+          sendMyGeo(lat, lng)
+
+          if (userMarker) {
+            userMarker.setLatLng([lat, lng]);
+          } else {
+            userMarker = L.marker([lat, lng]).addTo(map).bindPopup("Ты здесь").openPopup();
+            // map.setView([lat, lng], 15); // центрируем один раз
+          }
+        },
+        (error) => {
+          console.warn("⚠️ Ошибка геолокации:", error.message);
+        }
+      );
+    } else {
+      console.log("❌ Браузер не поддерживает геолокацию.");
+    }
+  }
+
+  // Запускаем обновление каждую секунду
+  getUserLocation()
+  setInterval(getUserLocation, 10000);
+</script>
+
+
+
+</body>
+</html>

@@ -6,20 +6,18 @@ app = Flask(__name__)
 render = render_template
 CORS(app)
 
+coords = []
+
 
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "POST":
         data = request.json
-        if data.get("type") == "get_users":
-            users = sql.get_users()
-            return jsonify({"status": True, "data": json.dumps(users)})
-            
-        user = {"username": data.get("username"), "password": data.get("password")}
-        sql.register(user["username"], user["password"])
-        return jsonify({"status": True, "message": "Successfully Saved!"})
+        coord = {"lat": data.lat, "lng": data.lng}
+        coords.append(coord)
+        return jsonify({"status": True})
         
-    return render("index.html", name="Shaxrux")
+    return render("index.html", name="Shaxrux", coords=coords)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
