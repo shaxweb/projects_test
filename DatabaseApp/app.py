@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
-import json, sql
+import json
 
 app = Flask(__name__)
 render = render_template
@@ -14,7 +14,7 @@ def home():
     if request.method == "POST":
         data = request.json
         print(f"\n\n{data}\n\n")
-        coord = {"lat": data.lat, "lng": data.lng}
+        coord = {"lat": data["lat"], "lng": data["lng"]}
         coords.append(coord)
         return jsonify({"status": True})
         

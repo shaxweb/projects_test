@@ -25,6 +25,7 @@
   const apiUrl = "https://shaxweb_database.onrender.com/"
   
   const sendMyGeo = (lat, lng) => {
+    alert("sending")
     fetch(apiUrl, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
