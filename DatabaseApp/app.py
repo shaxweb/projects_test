@@ -11,7 +11,7 @@ users = []
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-    global coords
+    global users
     if request.method == "POST":
         data = request.json
         user = data["user"]
@@ -25,7 +25,7 @@ def home():
         
         return jsonify({"status": True, "message": "Thanks"})
 
-    return render("index.html", name="Shaxrux", coords=coords)
+    return render("index.html", name="Shaxrux", users=users)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
