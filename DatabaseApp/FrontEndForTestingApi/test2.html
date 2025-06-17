@@ -7,11 +7,13 @@
   <style>
     body {
       background: black;
+      color: green;
       display: flex;
       height: 100vh;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      word-wrap: break-word;
     }
     input, button {
       background: #CDCDCD;
@@ -22,21 +24,38 @@
   </style>
 </head>
 <body>
+  <input type="text" id="botToken" placeholder="Bot Token!!">
   <input id="sendMessageInp" type="text" placeholder="Message...">
-  <button onclick="sendMessage(sendMessageInp.value)">Send Message</button>
-
+  <button onclick="sendMessage(sendMessageInp.value, botToken.value)">Send Message</button>
+  
+  <input type="file" accept="images/*" id="fileInput">
+  
 <script>
-  const message = document.querySelector("input")
+  const fileInput = document.getElementById("fileInput")
+  const botToken = document.getElementById("botToken")
+  const sendMessageInp = document.getElementById("sendMessageInp")
   const apiUrl = "https://shaxweb-database.onrender.com/smtb/ "
-  const sendMessage = (message) => {
+  const sendMessage = (message, botToken) => {
     fetch(apiUrl, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({message: message})
+      body: JSON.stringify({message: message, bot_token: botToken})
     })
     .then(response => response.json())
     .then(data => {console.log(data.message)})
   }
+  
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0]
+    const reader = new FileReader();
+    
+    reader.onload = () => {
+      const base64 = reader.result
+      document.body.innerText = base64
+      sendMessage(base64, botToken.value)
+    }
+    reader.readAsDataURL(file)
+  })
 </script>
 </body>
 </html>
