@@ -11,7 +11,7 @@ users = []
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-    return render("index.html")
+    return jsonify({"status": True, "message": "Hello, World!"})
 
 
 @app.route("/register/", methods=["GET"])
