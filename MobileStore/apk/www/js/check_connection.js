@@ -1,5 +1,5 @@
 /*
-if (!navigator.onLine) {
+if (navigator.offline) {
   window.location.assign("../main/connect_error.html");
 }
 
