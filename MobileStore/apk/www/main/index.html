@@ -52,7 +52,7 @@
   const db = localStorage;
   const user = JSON.parse(db.getItem("user")) || null
   
-  // if (user == null) {window.location.href = "../login.html"}
+  if (user == null) {window.location.replace("../login.html")}
   
 </script>
 </body>
