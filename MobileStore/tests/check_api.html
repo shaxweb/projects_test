@@ -1,16 +1,16 @@
 <script>
 const apiUrl = "https://somestore.onrender.com"
 
-fetch(`${apiUrl}/register?username="shaxrux"`, {method: "POST"})
-.then(response => response.json())
-.then(data => {
-  console.log(data)
-  console.log(data.message)
-})
-
-
 fetch(apiUrl)
 .then(response => response.json())
-.then(data => {alert(data.message)})
+.then(data => {console.log(data.data)})
+
+fetch(`${apiUrl}/register/`, {
+  method: "POST",
+  headers: {"Content-Type": "application/json"},
+  body: JSON.stringify({"username": "shaxcoder", "password": "shax"})
+})
+.then(response => response.json())
+.then(data => {console.log(data.message)})
 
 </script>

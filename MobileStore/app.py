@@ -1,13 +1,13 @@
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
-import json
+import funcs, json
 
 app = Flask(__name__)
 render = render_template
 CORS(app)
 
 users = []
-
+wait_users = []
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -21,8 +21,8 @@ def register():
         username, password = data.get("username"), data.get("password")
         
         if username and password:
-            users.append({"username": username, "password": password})
-            return jsonify({"status": True, "message": "Added"})
+            wait_users.append({"username": username, "password": password})
+            return jsonify({"status": True, "message": "email_sended"})
         else:
             return jsonify({"status": False, "message": "Uncorrect datas"})
         
