@@ -7,17 +7,18 @@
 </head>
 <body>
   <h1>Hello World</h1>
-  
-  <div class="myDiv">
-    <h2>Hello, World</h2>
-  </div>
+  <button id="changeBg">Bas</button>
   
 <script>
-  const myDiv = document.querySelector(".myDiv")
-  
-  myDiv.addEventListener("click", () => {
-    alert("Basildi")
-  })
+
+const changeBg = document.querySelector("#changeBg")
+
+changeBg.addEventListener("click", () => {
+  let body = document.querySelector("body")
+  body.style.background = "black"
+  body.style.color = "white"
+})
+
 </script>
 </body>
 </html>

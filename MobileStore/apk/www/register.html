@@ -63,6 +63,7 @@
   const pwViewBnt2 = document.getElementById("pwViewBnt2")
   const errPwInput2 = document.getElementById("errPwInput2")
   
+  const formButton = document.querySelector(".form-button")
   const symbols = Array.from("qwertyuiopasdfghjklzxcvbnm1234567890_");
   
   nameInput.addEventListener("input", () => {
@@ -121,6 +122,46 @@
   } else {
     errPwInput2.innerHTML = ""
     passwordInputBox2.style.border = "2px solid #232323"
+  }
+})
+
+formButton.addEventListener("click", () => {
+  const db = localStorage;
+  const user = JSON.parse(db.getItem("user")) || null
+  
+  {
+    const password1 = pwInput1.value
+    const password2 = pwInput2.value
+    
+    if (nameInput.value.length < 6) {
+      nameInputBox.style.border = "2px solid #EE4444"
+      errNameInput.innerHTML = "<h5>Len Error min:6</h5>"
+      errNameInput.style.margin = "0 1em"
+      errNameInput.style.color = "#EE4444"
+      return
+    }
+    
+    if (password1.length < 8) {
+      passwordInputBox1.style.border = "2px solid #EE4444"
+      errPwInput1.innerHTML = "<h5>Len Error min:8</h5>"
+      errPwInput1.style.margin = "0 1em"
+      errPwInput1.style.color = "#EE4444"
+      
+    } else if (password1 == password2) {
+      db.setItem("user", JSON.stringify({username: nameInput.value, password: password1}))
+      window.location.replace("main/index.html")
+      
+    } else {
+      passwordInputBox1.style.border = "2px solid #EE4444"
+      errPwInput1.innerHTML = "<h5>Passwords do not match</h5>"
+      errPwInput1.style.margin = "0 1em"
+      errPwInput1.style.color = "#EE4444"
+      
+      passwordInputBox2.style.border = "2px solid #EE4444"
+      errPwInput2.innerHTML = "<h5>Passwords do not match</h5>"
+      errPwInput2.style.margin = "0 1em"
+      errPwInput2.style.color = "#EE4444"
+    }
   }
 })
   
