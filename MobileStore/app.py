@@ -28,8 +28,7 @@ def register():
             return jsonify({"status": False, "message": "Username already taked"})
     
     users.append({"username": username, "password": password})
-    
-  return jsonify({"status": True, "message": "User created"})
+    return jsonify({"status": True, "message": "User created"})
 
 
 if __name__ == '__main__':
