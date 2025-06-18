@@ -11,23 +11,21 @@ users = []
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-    return jsonify({"status": True, "message": "Hello, World!"})
+    return jsonify({"status": True, "message": "Hello, World!", "data": users})
 
 
-@app.route("/register/", methods=["GET"])
+@app.route("/register/", methods=["GET", "POST"])
 def register():
-    data = request.args
-    username, password = data.get("username"), data.get("password")
-    if not username:
-        return jsonify({"status": False, "message": "Username must not be empty"})
-    if not password:
-        return jsonify({"status": False, "message": "Password must not be empty"})
-    
-    for i in users:
-        if i["username"] == username:
-            return jsonify({"status": False, "message": "Username already taked"})
-    
-    users.append({"username": username, "password": password})
+    if request.method == "POST":
+        data = request.json
+        username, password = data.get("username"), data.get("password")
+        
+        if username and password:
+            users.append({"username": username, "password": password})
+            return jsonify({"status": True, "message": "Added"})
+        else:
+            return jsonify({"status": False, "message": "Uncorrect datas"})
+        
     return jsonify({"status": True, "message": "User created"})
 
 
