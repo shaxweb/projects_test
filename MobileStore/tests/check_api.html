@@ -1,0 +1,11 @@
+<script>
+const apiUrl = "https://somestore.onrender.com"
+
+fetch(`${apiUrl}/register?name="shaxrux"`)
+.then(response => response.json())
+.then(data => {
+  console.log(data)
+  console.log(data.message)
+})
+
+</script>
