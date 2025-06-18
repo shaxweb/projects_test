@@ -14,7 +14,7 @@ def home():
     return render("index.html")
 
 
-@app.route("/register/", method=["GET"])
+@app.route("/register/", methods=["GET"])
 def register():
   return jsonify({"status": True, "message": f"Datas: {request}"})
 
