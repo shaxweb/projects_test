@@ -29,7 +29,7 @@ def register():
     
     users.append({"username": username, "password": password})
     
-  return jsonify({"status": True, "message": f"Datas: {request}"})
+  return jsonify({"status": True, "message": "User created"})
 
 
 if __name__ == '__main__':
