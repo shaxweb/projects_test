@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.shaxcoder.somestore"
+        version="0.1-alpha"
+        xmlns="http://www.w3.org/ns/widgets"
+        xmlns:cdv="http://cordova.apache.org/ns/1.0">
+
+  <name>SomeStore</name>
+  <description>Store</description>
+  <author email="shaxrux243@gmail.com" href="https://shaxweb.github.io/projects">Shaxrux</author>
+
+  <content src="login.html" />
+  <access origin="*" />
+  <allow-navigation href="*" />
+  <allow-intent href="*" />
+  
+  <platform name="android">
+    <icon src="res/icon.png" />
+    <preference name="SplashScreenDelay" value="2000" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/splash.png" />
+    <preference name="AndroidWindowSplashScreenBackground" value="#FFFFFF" />
+  </platform>
+
+</widget>
