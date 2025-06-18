@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+
+:root {
+  --bg-yellowgreen: #D7FC70;
+  --bg-yellowgreen2: #C3E366;
+  --bg-dark: #111111;
+  --bg-dark2: #232323;
+  --border: #636363;
+  --success-color: #28AE29;
+  --warning-color: #FEC629;
+  --error-color: #EE4444;
+}
+
+body {
+  background: var(--bg-dark2);
+  color: white;
+}
+
+header {
+  background: var(--bg-dark2);
+  padding: 1em;
+  display: flex;
+  color: var(--bg-yellowgreen);
+}
+header img { width: 30px; }
+
+main {
+  background: var(--bg-dark);
+  height: 80vh;
+  border-radius: 2em 2em ; /* 2em 2em 0 0 */
+  padding: 1em;
+  padding-top: 2em;
+}
+
+.categories-list {
+  display: flex;
+  overflow: auto;
+  gap: .5em;
+}
+
+.categories-list .category {
+  background: linear-gradient(to right bottom, var(--bg-yellowgreen), var(--bg-yellowgreen2));
+  border-radius: 1em;
+  height: 150px;
+  width: 250px;
+  flex-shrink: 0;
+  display: flex;
+  padding: .5em;
+  color: black;
+  overflow: hidden;
+}
+
+.category img {
+  width: 90%;
+  height: 90%;
+}
+
+.profile-container {
+  background: var(--bg-yellowgreen);
+  padding: 1em;
+  border-radius: .5em;
+  color: black;
+}
+
+.profile-container .profile-tag {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border)
+}
+
+footer {
+  display: flex;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+footer .tags {
+  background: var(--bg-yellowgreen);
+  border-radius: 2.25em;
+  display: flex;
+  padding: .25em;
+  animation: 1s footerShadow infinite;
+  gap: 1em;
+  padding: 0 .25em;
+}
+
+footer .tags .tag {
+  padding: .75em 1em;
+  border-radius: 2em;
+  display: flex;
+  flex-direction: column;
+  height: 2em; width: 2em;
+  justify-content: center;
+  transition: all .5s ease;
+  align-items: center;
+  color: black;
+}
+
+footer .tags .tag img {
+  width: 30px;
+}
+
+@keyframes footerShadow {
+  0%, 100% {
+    box-shadow: 0 0 1em var(--bg-yellowgreen);
+  } 50% {
+    box-shadow: 0 0 .5em var(--bg-yellowgreen);
+  }
+}

@@ -1,0 +1,128 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MobileStore</title>
+  <link rel="stylesheet" href="css/start-form.css">
+</head>
+<body>
+  
+  <img class="logo-img" src="img/logo.png" alt="">
+  
+  <div class="form-space">
+    <div class="text-space">
+      <h2>Welcome Back!</h2><br>
+      Enter your details below
+    </div>
+    
+    <div class="inputs-container">
+      <div class="input-box" id="nameInputBox">
+        <img src="img/person.png" alt="">
+        <input id="nameInput" type="text" placeholder="Username">
+      </div>
+      <div id="errNameInput"></div>
+      
+      <div class="input-box" id="pwInputBox1">
+        <img src="img/lock.png" alt="">
+        <input id="pwInput1" class="pwInput" type="password" placeholder="Password">
+        <button id="pwViewBnt1" onclick="viewButtonChange(pwInput1, pwViewBnt1)"><img src="img/eyes.png" alt=""></button>
+      </div>
+      <div id="errPwInput1"></div>
+      
+      <div class="input-box" id="pwInputBox2">
+        <img src="img/lock.png" alt="">
+        <input id="pwInput2" class="pwInput" type="password" placeholder="Password again">
+        <button id="pwViewBnt2" onclick="viewButtonChange(pwInput2, pwViewBnt2)"><img src="img/eyes.png" alt=""></button>
+      </div>
+      <div id="errPwInput2"></div>
+      
+      <button class="form-button">Log In</button>
+      
+      <div class="link-space">
+        <p>Do you have an account?</p>
+        <a href="login.html">Log In</a>
+      </div>
+    </div>
+    
+  </div>
+  
+<script>
+  const nameInputBox = document.getElementById("nameInputBox")
+  const nameInput = document.getElementById("nameInput")
+  const errNameInput = document.getElementById("errNameInput")
+  
+  const passwordInputBox1 = document.getElementById("pwInputBox1")
+  const pwInput1 = document.getElementById("pwInput1")
+  const pwViewBnt1 = document.getElementById("pwViewBnt1")
+  const errPwInput1 = document.getElementById("errPwInput1")
+  
+  const passwordInputBox2 = document.getElementById("pwInputBox2")
+  const pwInput2 = document.getElementById("pwInput2")
+  const pwViewBnt2 = document.getElementById("pwViewBnt2")
+  const errPwInput2 = document.getElementById("errPwInput2")
+  
+  const symbols = Array.from("qwertyuiopasdfghjklzxcvbnm1234567890_");
+  
+  nameInput.addEventListener("input", () => {
+    let name = nameInput.value
+    let error = null
+    
+    for (let i of name) {
+      if (!symbols.includes(i.toLowerCase())) {
+        error = i
+      }
+    }
+    
+    if (error != null) {
+      nameInputBox.style.border = "2px solid #EE4444"
+      errNameInput.innerHTML = `<h5>error with "${error}".Only use Aa-Zz 0-9 and "_"</h5>`
+      errNameInput.style.margin = "0 1em"
+      errNameInput.style.color = "#EE4444"
+    } else {
+      nameInputBox.style.border = "2px solid #232323"
+      errNameInput.innerHTML = ""
+    }
+  })
+  
+  const viewButtonChange = (inputBox, buttonBox) => {
+    if (inputBox.type == "text") {
+      inputBox.type = "password"
+      buttonBox.src = "../img/eyes.png"
+    } else {
+      inputBox.type = "text"
+      buttonBox.src = "../img/eyes_off.png"
+    }
+  }
+  
+  pwInput1.addEventListener("input", () => {
+    const password = pwInput1.value
+    
+    if (password.length < 8) {
+      passwordInputBox1.style.border = "2px solid #FEC629"
+      errPwInput1.innerHTML = "<h5>Len error (min.8)</h5>"
+      errPwInput1.style.margin = "0 1em"
+      errPwInput1.style.color = "#FEC629"
+    } else {
+      errPwInput1.innerHTML = ""
+      passwordInputBox1.style.border = "2px solid #232323"
+    }
+  })
+  
+  pwInput2.addEventListener("input", () => {
+  const password = pwInput2.value
+  
+  if (password.length < 8) {
+    passwordInputBox2.style.border = "2px solid #FEC629"
+    errPwInput2.innerHTML = "<h5>Len error (min.8)</h5>"
+    errPwInput2.style.margin = "0 1em"
+    errPwInput2.style.color = "#FEC629"
+  } else {
+    errPwInput2.innerHTML = ""
+    passwordInputBox2.style.border = "2px solid #232323"
+  }
+})
+  
+</script>
+</body>
+</html>

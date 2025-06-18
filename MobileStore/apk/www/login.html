@@ -1,0 +1,105 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MobileStore</title>
+  <link rel="stylesheet" href="css/start-form.css">
+</head>
+<body>
+  
+  <img class="logo-img" src="img/logo.png" alt="">
+  
+  <div class="form-space">
+    <div class="text-space">
+      <h2>Welcome Back!</h2><br>
+      Enter your details below
+    </div>
+    
+    <div class="inputs-container">
+      <div class="input-box" id="nameInputBox">
+        <img src="img/person.png" alt="">
+        <input id="nameInput" type="text" placeholder="Username">
+      </div>
+      <div id="errNameInput"></div>
+      
+      <div class="input-box" id="passwordInputBox">
+        <img src="img/lock.png" alt="">
+        <input id="pwInput" type="password" placeholder="Password">
+        <button id="pwViewBnt"><img id="viewPw" src="img/eyes.png" alt=""></button>
+      </div>
+      <div id="errPasswordInput"></div>
+      
+      <button type="button" class="form-button">Log In</button>
+      
+      <div class="link-space">
+        <p>Don't have an account?</p>
+        <a href="register.html">Sign Up</a>
+      </div>
+    </div>
+    
+  </div>
+  
+<script>
+  const nameInputBox = document.getElementById("nameInputBox")
+  const nameInput = document.getElementById("nameInput")
+  const errNameInput = document.getElementById("errNameInput")
+  
+  const passwordInputBox = document.getElementById("passwordInputBox")
+  const pwInput = document.getElementById("pwInput")
+  const pwViewBnt = document.getElementById("pwViewBnt")
+  const errPasswordInput = document.getElementById("errPasswordInput")
+  
+  const viewPw = document.getElementById("viewPw")
+  const symbols = Array.from("qwertyuiopasdfghjklzxcvbnm1234567890_");
+
+  pwViewBnt.addEventListener("click", () => {
+    if (pwInput.type == "password") {
+      pwInput.type = "text"
+      viewPw.src = "img/eyes_off.png"
+    }
+    else if (pwInput.type == "text") {
+      pwInput.type = "password"
+      viewPw.src = "img/eyes.png"
+    }
+  })
+  
+  nameInput.addEventListener("input", () => {
+    const name = nameInput.value
+    let error = false
+    
+    for (let i of name) {
+      if (!symbols.includes(i.toLowerCase())) {
+        error = i
+      }
+    }
+    
+    if (error != false) {
+      nameInputBox.style.border = "2px solid #EE4444"
+      errNameInput.innerHTML = `<h5>error with "${error}".Only use Aa-Zz 0-9 and "_"</h5>`
+      errNameInput.style.margin = "0 1em"
+      errNameInput.style.color = "#EE4444"
+    } else {
+      nameInputBox.style.border = "2px solid #232323"
+      errNameInput.innerHTML = ""
+    }
+
+  })
+  
+  pwInput.addEventListener("input", () => {
+    const password = pwInput.value
+    
+    if (password.length < 8) {
+      passwordInputBox.style.border = "2px solid #FEC629"
+      errPasswordInput.innerHTML = "<h5>Len error (min.8)</h5>"
+      errPasswordInput.style.margin = "0 1em"
+      errPasswordInput.style.color = "#FEC629"
+    } else {
+      errPasswordInput.innerHTML = ""
+      passwordInputBox.style.border = "2px solid #232323"
+    }
+  })
+  
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MobileStore</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #D7FC70;
+    }
+    
+    main img {
+      width: 200px;
+      animation: 2s imageAnim infinite;
+    }
+    .connect-err-box {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+    }
+    .connect-err-box button {
+      background: #D7FC70;
+      padding: .75em;
+      border: none;
+      border-radius: .5em;
+    }
+    
+    @keyframes imageAnim {
+      0%, 100% {filter: 0;}
+      50% {filter: drop-shadow(0 0 .25em #D7FC70)}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>MobileStore</h2>
+  </header>
+  <main>
+    
+    <div class="connect-err-box">
+      <img src="../img/icons/connection_error.png" alt="">
+      <h3>Connection Error!!!</h3>
+      <br>
+      <button id="retryConnect">Retry</button>
+    </div>
+    
+  </main>
+
+<script>
+  window.addEventListener("online", () => {window.history.back()})
+  
+  document.getElementById("retryConnect").addEventListener("click", () => {
+    if (navigator.onLine) {
+      window.location.assign("index.html")
+    } else { alert("Connect Error") }
+  })
+</script>
+</body>
+</html>

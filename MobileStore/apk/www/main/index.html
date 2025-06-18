@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MobileStore</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <header>
+    <h2>MobileStore</h2>
+  </header>
+  <main>
+    
+    <div class="categories-list">
+      <div class="category">
+        <h1 class="category-name">Sell your products</h1>
+        <img src="../img/icons/pay.png" alt="">
+      </div>
+      <div class="category">
+        <h1 class="category-name">Buy products</h1>
+        <img src="../img/icons/buy.png" alt="">
+      </div>
+    </div>
+    
+    
+    
+  </main>
+  
+  <br><br><br>
+  
+  <footer>
+    <div class="tags">
+      <div class="tag">
+        <img src="../img/home.png" alt="">
+        <h5>Home</h5>
+      </div>
+      <div class="tag" id="tag">
+        <img src="../img/search_dark.png" alt="">
+      </div>
+      <div class="tag">
+        <img src="../img/home.png" alt="">
+      </div>
+      <div class="tag" onclick="location.replace('profile.html')">
+        <img src="../img/person_dark.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+<script src="../js/check_connection.js"></script>
+<script>
+  const db = localStorage;
+  const user = JSON.parse(db.getItem("user")) || null
+  
+  // if (user == null) {window.location.href = "../login.html"}
+  
+</script>
+</body>
+</html>

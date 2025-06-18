@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MobileStore</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <header>
+    <h2>User</h2>
+  </header>
+  <main>
+    
+    <div class="profile-container">
+      <div class="profile-tag">
+        <h3>Name:</h3>
+        <h3>Shaxrux</h3>
+      </div>
+      <div class="profile-tag">
+        <h3>Status:</h3>
+        <h3>Seller</h3>
+      </div>
+      <div class="profile-tag">
+        <h3>Store:</h3>
+        <h3>ShaxStore</h3>
+      </div>
+      <div class="profile-tag">
+        <h3>Rate:</h3>
+        <h3>Gold Month</h3>
+      </div>
+    </div>
+    
+  </main>
+  
+  <br><br><br>
+  
+  <footer>
+    <div class="tags">
+      <div class="tag" onclick="location.replace('index.html')">
+        <img src="../img/home.png" alt="">
+      </div>
+      <div class="tag" id="tag">
+        <img src="../img/search_dark.png" alt="">
+      </div>
+      <div class="tag">
+        <img src="../img/home.png" alt="">
+      </div>
+      <div class="tag">
+        <img src="../img/person_dark.png" alt="">
+        <h5>Profile</h5>
+      </div>
+    </div>
+  </footer>
+
+<script src="../js/check_connection.js"></script>
+<script>
+  const db = localStorage;
+  const user = JSON.parse(db.getItem("user")) || null
+  
+  // if (user == null) {window.location.href = "../login.html"}
+  
+</script>
+</body>
+</html>
