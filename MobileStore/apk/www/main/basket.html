@@ -39,24 +39,29 @@
 <script src="../js/check_user.js"></script>
 <script>
   const productsList = document.querySelector(".products-list")
-  
-  let db = localStorage;
   let products = JSON.parse(db.getItem("basket")) || null
-  if (products == null) {productsList.innerHTML = "<h2>Empty</h2>"; return;}
+  if (products == null) {
+    productsList.innerHTML = "<h2>Empty</h2>"
+  } else {
   
-  products.forEach(product => {
-    const div = document.createElement("div");
-    div.className = "product-box";
-    div.innerHTML = `
-      <img src="../img/icons/product.jpg" alt="">
-      <h4 class="product-title">${product[1]}</h4>
-      <div>
-        <h5 class="product-price">$${product[3]}</h5>
-        <img src="../img/add_basket_white.png" alt="" onclick="addToCard(${product[0]})">
-      </div>
-    `
-    productsList.appendChild(div);
-  })
+    fetch(`https://somestore.onrender.com/get_products?products=${products}`)
+    .then(response => response.json())
+    .then(data => {
+      products.forEach(product => {
+        const div = document.createElement("div");
+        div.className = "product-box";
+        div.innerHTML = `
+          <img src="../img/icons/product.jpg" alt="">
+          <h4 class="product-title">${product[1]}</h4>
+          <div>
+            <h5 class="product-price">$${product[3]}</h5>
+            <img src="../img/add_basket_white.png" alt="" onclick="addToCard(${product[0]})">
+          </div>
+        `
+        productsList.appendChild(div);
+      })
+    })
+  }
 
 </script>
 </body>
