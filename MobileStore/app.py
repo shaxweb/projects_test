@@ -29,11 +29,16 @@ def search():
 def get_user():
     data = request.args
     username = data.get("username")
+    user_id = data.get("id")
     if username:
         user = sql.get_user_by_username(username)
         if user:
             return jsonify({"status": True, "user": {"id": user[0], "username": user[1], "password": user[3]}})
     
+    elif user_id:
+        user = sql.get_data(user_id)["user"]
+        return jsonify({"status": True, "user_data": user})
+
     return jsonify({"status": False})
 
 

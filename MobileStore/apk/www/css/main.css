@@ -94,6 +94,19 @@ main {
   overflow: hidden;
   border: 2px solid var(--bg-yellowgreen);
   border-radius: .4em;
+  position: relative;
+}
+
+.product-box .quantity {
+  position: absolute;
+  top: .25em; right: .25em;
+  height: 20px; width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-dark);
+  border-radius: 50%;
+  color: var(--bg-yellowgreen);
 }
 
 .product-box img:first-child {
