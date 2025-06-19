@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
-import funcs, json
+import scripts, json, sql
 
 app = Flask(__name__)
 render = render_template
