@@ -82,6 +82,7 @@ def auth_func():
         user = sql.get_wait_user_by_token(token)
         if user:
             sql.create_user(user[1], user[2], user[3])
+            sql.delete_wait_user(user[0])
             return render("auth.html", status=True, username=user[1])
     
     return render("auth.hrml", status=False, error="Token was broken")

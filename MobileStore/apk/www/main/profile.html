@@ -15,7 +15,7 @@
     <div class="profile-container">
       <div class="profile-tag">
         <h5>Username:</h5>
-        <input class="username-value" type="text" value="Shaxrux">
+        <input class="username-value" type="text">
       </div>
       <div class="profile-tag">
         <h5>Status:</h5>
@@ -23,7 +23,7 @@
       </div>
       <div class="profile-tag">
         <h5>Email:</h5>
-        <input class="email-value" value="shaxrux243@gmail.com" disabled>
+        <input class="email-value" disabled>
       </div>
       <div class="profile-tag">
         <h5>Rate:</h5>
@@ -44,7 +44,7 @@
         <img src="../img/search_dark.png" alt="">
       </div>
       <div class="tag" onclick="location.replace('basket.html')">
-        <img src="../img/basket .png" alt="">
+        <img src="../img/basket_dark.png" alt="">
       </div>
       <div class="tag">
         <img src="../img/person_dark.png" alt="">
@@ -60,13 +60,13 @@
   let emailValue = document.querySelector(".email-value")
   let cur_user_data = null
   
-  fetch(`https://somestore.onrender.com/get_user?id=${cur_user["id"]}`)
+  fetch(`https://somestore.onrender.com/get_user/?id=${cur_user["id"]}`)
   .then(response => response.json())
   .then(data => {
     if (data.status) {
       cur_user_data = data.user_data
       usernameValue.value = data.user_data[1]
-      emailValue.value = data.user_data[3]
+      emailValue.value = data.user_data[2]
     } else {
       window.location.replace("../login.html")
     }

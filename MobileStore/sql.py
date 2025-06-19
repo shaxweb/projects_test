@@ -76,6 +76,11 @@ def create_product(title, description, price):
   db.commit()
 
 
+def delete_wait_user(id):
+  cur.execute("DELETE FROM wait_users WHERE id = ?", (id,))
+  db.commit()
+
+
 create_product("iPhone", "Phone", 1500)
 create_product("Samsung", "Best Phone", 1200)
 create_product("Nokia", "Phone", 1500)

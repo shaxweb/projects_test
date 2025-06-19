@@ -55,17 +55,29 @@
           <h4 class="product-title">${product.data[1]}</h4>
           <div>
             <h5 class="product-price">$${product.data[3]}</h5>
-            <img src="../img/add_basket_white.png" alt="" onclick="addToCard(${product[0]})">
+            <img src="../img/remove_basket_white.png" alt="" onclick="removeFromCard(${product.data[0]})">
           </div>
-          <h3 class="quantity">${product.quantity}</h3>
+          <h3 id="quantity_product_${product.data[0]}" class="quantity">${product.quantity}</h3>
         `
         productsList.appendChild(div);
       }
-      
-      for (let i in data.data) {
-        console.log(data.data[i].data)
-      }
     })
+  }
+  
+  let removeFromCard = (id) => {
+    let basket = JSON.parse(db.getItem("basket")) || null
+    if (basket == null) return;
+    
+    let quantityBox = document.getElementById(`quantity_product_${id}`)
+    let new_basket = []
+    let removed = false
+    
+    for (let i of basket) {
+      if (i != id) {new_basket.push(i)}
+      else {if(removed) {new_basket.push(i)} else {removed = true}}
+    }
+
+    db.setItem("basket", JSON.stringify(new_basket))
   }
 
 </script>
