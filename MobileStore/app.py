@@ -43,7 +43,7 @@ def get_products():
     products = {}
     if data:
         for i in data:
-            product = sql.get_data(i)[i]
+            product = sql.get_data(i)["product"]
             if product:
                 if products.get(f"product_{i}"):
                     products[f"product_{i}"]["quantity"] += 1
