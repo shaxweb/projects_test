@@ -46,7 +46,7 @@ def register():
         if not sql.get_user_by_username(username):
             if not sql.get_user_by_email(email):
                 sql.create_wait_user(username, email, password)
-                # scripts.send_token_to_mail(email)
+                scripts.send_token_to_mail(email)
                 return jsonify({"status": True, "message": "Token sended"})
             return jsonify({"status": False, "error": "email"})
         return jsonify({"status": False, "error": "username"})
