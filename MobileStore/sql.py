@@ -56,12 +56,13 @@ def get_user_by_username(username):
 def get_user_by_email(email):
   return cur.execute("SELECT * FROM users WHERE email = ?", (email,)).fetchone()
 
+
 def get_wait_user_by_token(token):
   return cur.execute("SELECT * FROM wait_users WHERE token = ?", (token,)).fetchall()
 
 
 def create_wait_user(username, email, password, token):
-  cur.execute("INSERT INTO users(username, email, password, token) VALUES(?,?,?,?)", (username, email, password, token,))
+  cur.execute("INSERT INTO wait_users(username, email, password, token) VALUES(?,?,?,?)", (username, email, password, token,))
   db.commit()
 
 
