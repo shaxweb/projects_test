@@ -12,7 +12,7 @@ def send_token_to_mail(receiver_email):
   message["From"] = sender_email
   message["To"] = receiver_email
   message["Subject"] = "Регистрация!"
-  body = f"Ваш ссылка => https://somestore.onrender.com/auth?token={token}"
+  body = f"<h1>Ваш ссылка => <i>https://somestore.onrender.com/auth?token={token}</i></h1>"
   message.attach(MIMEText(body, "plain"))
   
   try:

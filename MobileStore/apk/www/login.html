@@ -105,6 +105,7 @@
   })
   
   formButton.addEventListener("click", () => {
+    formButton.innerText = "Wait..."
     let db = localStorage;
     let username = nameInput.value
     let password = pwInput.value
@@ -124,12 +125,14 @@
             errPasswordInput.innerHTML = `<h5>UnCorrect Password</h5>`
             errPasswordInput.style.margin = "0 1em"
             errPasswordInput.style.color = "#EE4444"
+            formButton.innerText = "Log In"
           }
         } else {
           nameInputBox.style.border = "2px solid #EE4444"
           errNameInput.innerHTML = `<h5>Username Not Found</h5>`
           errNameInput.style.margin = "0 1em"
           errNameInput.style.color = "#EE4444"
+          formButton.innerText = "Log In"
         }
       })
     } else {
@@ -137,6 +140,7 @@
       errNameInput.innerHTML = `<h5>${res_username.message}</h5>`
       errNameInput.style.margin = "0 1em"
       errNameInput.style.color = "#EE4444"
+      formButton.innerText = "Log In"
     }
   })
   

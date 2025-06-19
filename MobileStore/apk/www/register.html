@@ -137,6 +137,7 @@
 })
 
 formButton.addEventListener("click", () => {
+  formButton.innerText = "Wait..."
   let username = nameInput.value
   let email = emailInput.value
   let password1 = pwInput1.value
@@ -168,11 +169,13 @@ formButton.addEventListener("click", () => {
               errEmailInput.innerHTML = `<h5>Email already taked</h5>`
               errEmailInput.style.margin = "0 1em"
               errEmailInput.style.color = "#EE4444"
+              formButton.innerText = "Log In"
             } else if (data.error == "username") {
               nameInputBox.style.border = "2px solid #EE4444"
               errNameInput.innerHTML = `<h5>Username already taked</h5>`
               errNameInput.style.margin = "0 1em"
               errNameInput.style.color = "#EE4444"
+              formButton.innerText = "Log In"
             }
           }
         })
@@ -187,20 +190,22 @@ formButton.addEventListener("click", () => {
         errPwInput2.innerHTML = `<h5>${res_password.message}</h5>`
         errPwInput2.style.margin = "0 1em"
         errPwInput2.style.color = "#EE4444"
+        formButton.innerText = "Log In"
       }
     } else {
       emailInputBox.style.border = "2px solid #EE4444"
       errEmailInput.innerHTML = `<h5>${res_email.message}</h5>`
       errEmailInput.style.margin = "0 1em"
       errEmailInput.style.color = "#EE4444"
+      formButton.innerText = "Log In"
     }
   } else {
     nameInputBox.style.border = "2px solid #EE4444"
     errNameInput.innerHTML = `<h5>${res_username.message}</h5>`
     errNameInput.style.margin = "0 1em"
     errNameInput.style.color = "#EE4444"
+    formButton.innerText = "Log In"
   }
-  
 })
   
 </script>
