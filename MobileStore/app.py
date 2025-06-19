@@ -9,6 +9,7 @@ CORS(app)
 
 @app.route("/")
 def home():
+    print("\n\n\nHello, Wolrd!\n\n\n")
     products = sql.get_all_data()["products"]
     return jsonify({"status": True, "message": "Hello, Wolrd", "data": products})
 
