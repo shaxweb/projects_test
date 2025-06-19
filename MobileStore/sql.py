@@ -51,6 +51,15 @@ def get_user_by_username(username):
   return cur.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
 
 
+def get_user_by_email(email):
+  return cur.execute("SELECT * FROM users WHERE email = ?", (email,)).fetchone()
+
+
+def create_user(username, email, password):
+  cur.execute("INSERT INTO users(username, email, password) VALUES(?,?,?)", (username, email, password,))
+  db.commit()
+
+
 def create_product(title, description, price):
   cur.execute("INSERT INTO products(title, description, price) VALUES(?,?,?)", (title, description, price))
   db.commit()

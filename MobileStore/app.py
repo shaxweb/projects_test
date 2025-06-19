@@ -35,7 +35,21 @@ def get_user():
             return jsonify({"status": True, "id": user[0], "username": user[1], "password": user[3]})
     
     return jsonify({"status": False})
+
+
+@app.route("/register/", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        data = request.data
+        username, email, password = data.get("username"), data.get("email"), data.get("password")
         
+        if not sql.get_user_by_username(username):
+            if not sql.get_user_by_email(email):
+                sql.create_wait_user(username, email, password)
+                scripts.send_token_to_mail(email)
+                return jsonify({"status": True, "message": "Token sended"})
+            return jsonify({"status": False, "error": "email"})
+        return jsonify({"status": False, "error": "username"})
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)

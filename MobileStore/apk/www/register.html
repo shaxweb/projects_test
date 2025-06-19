@@ -155,7 +155,23 @@ formButton.addEventListener("click", () => {
           body: JSON.stringify({username: username, email: email, password: password})
         })
         .then(response => response.json())
-        .then(data => {})
+        .then(data => {
+          if (data.status) {
+            alert("Done")
+          } else {
+            if (data.error == "email") {
+              emailInputBox.style.border = "2px solid #EE4444"
+              errEmailInput.innerHTML = `<h5>Email already taked</h5>`
+              errEmailInput.style.margin = "0 1em"
+              errEmailInput.style.color = "#EE4444"
+            } else if (data.error == "username") {
+              nameInputBox.style.border = "2px solid #EE4444"
+              errNameInput.innerHTML = `<h5>Username already taked</h5>`
+              errNameInput.style.margin = "0 1em"
+              errNameInput.style.color = "#EE4444"
+            }
+          }
+        })
         return;
       } else {
         passwordInputBox1.style.border = "2px solid #EE4444"
