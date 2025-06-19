@@ -58,7 +58,7 @@ def get_user_by_email(email):
 
 
 def get_wait_user_by_token(token):
-  return cur.execute("SELECT * FROM wait_users WHERE token = ?", (token,)).fetchall()
+  return cur.execute("SELECT * FROM wait_users WHERE token = ?", (token,)).fetchone()
 
 
 def create_wait_user(username, email, password, token):
