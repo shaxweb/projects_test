@@ -41,6 +41,7 @@
   </div>
 
 <script src="js/check_connection.js"></script>
+<script src="js/check_data.js"></script>
 <script>
   const nameInputBox = document.getElementById("nameInputBox")
   const nameInput = document.getElementById("nameInput")
@@ -104,31 +105,41 @@
   })
   
   formButton.addEventListener("click", () => {
-    const db = localStorage;
-    const user = JSON.parse(db.getItem("user")) || null
+    let username = nameInput.value
+    let password = pwInput.value
+    let res_username = check_username(username)
+    let error = null
+    let user_id = null
     
-    if (user == null) {
+    if (!res_username.status) {
       nameInputBox.style.border = "2px solid #EE4444"
-      errNameInput.innerHTML = "<h5>User Not Found</h5>"
+      errNameInput.innerHTML = `<h5>${res_username.message}</h5>`
       errNameInput.style.margin = "0 1em"
       errNameInput.style.color = "#EE4444"
-    } else if (user.username != nameInput.value) {
-      nameInputBox.style.border = "2px solid #EE4444"
-      errNameInput.innerHTML = "<h5>User Not Found</h5>"
-      errNameInput.style.margin = "0 1em"
-      errNameInput.style.color = "#EE4444"
+      return
     } else {
-      if (pwInput.value == user.password) {
-        let cur_user = {username: user.username, password: user.password}
-        db.setItem("cur_user", JSON.stringify(cur_user))
-        window.location.replace("main/index.html")
-      } else {
-        passwordInputBox.style.border = "2px solid #EE4444"
-        errPasswordInput.innerHTML = "<h5>Uncorrect password</h5>"
-        errPasswordInput.style.margin = "0 1em"
-        errPasswordInput.style.color = "#EE4444"
-      }
+      fetch(`https://somestore.onrender.com/get_user?username=${username}`)
+      .then(response => response.json())
+      .then(data => {
+        if (!data.status) { error = "user not found" }
+        else {
+          let password1 = data.user.password
+          let res_password = check_passord(password, password1)
+          if (!res_password.status) { error = res_password.message }
+          else { user_id = data.user.id }
+        }
+      })
     }
+    if (error != null) {
+      nameInputBox.style.border = "2px solid #EE4444"
+      errNameInput.innerHTML = `<h5>${error}</h5>`
+      errNameInput.style.margin = "0 1em"
+      errNameInput.style.color = "#EE4444"
+      return
+    }
+    
+    db.setItem("cur_user", JSON.stringify({id: user_id}))
+    window.location.replace("main/index.html")
   })
   
 </script>

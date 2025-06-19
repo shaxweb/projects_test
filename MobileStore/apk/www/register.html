@@ -27,7 +27,7 @@
         <img src="img/mail.png" alt="">
         <input id="emailInput" type="text" placeholder="Email">
       </div>
-      <div id="errNameInput"></div>
+      <div id="errEmailInput"></div>
       
       <div class="input-box" id="pwInputBox1">
         <img src="img/lock.png" alt="">
@@ -54,6 +54,7 @@
   </div>
 
 <script src="js/check_connection.js"></script>
+<script src="js/check_data.js"></script>
 <script>
   const nameInputBox = document.getElementById("nameInputBox")
   const nameInput = document.getElementById("nameInput")
@@ -68,6 +69,10 @@
   const pwInput2 = document.getElementById("pwInput2")
   const pwViewBnt2 = document.getElementById("pwViewBnt2")
   const errPwInput2 = document.getElementById("errPwInput2")
+  
+  const emailInputBox = document.getElementById("emailInputBox")
+  const emailInput = document.getElementById("emailInput")
+  const errEmailInput = document.getElementById("errEmailInput")
   
   const formButton = document.querySelector(".form-button")
   const symbols = Array.from("qwertyuiopasdfghjklzxcvbnm1234567890_");
@@ -132,43 +137,50 @@
 })
 
 formButton.addEventListener("click", () => {
-  const db = localStorage;
-  const user = JSON.parse(db.getItem("user")) || null
+  let username = nameInput.value
+  let email = emailInput.value
+  let password1 = pwInput1.value
+  let password2 = pwInput2.value
+  let error = null
+  let res_username = check_username(username)
   
-  {
-    const password1 = pwInput1.value
-    const password2 = pwInput2.value
-    
-    if (nameInput.value.length < 6) {
-      nameInputBox.style.border = "2px solid #EE4444"
-      errNameInput.innerHTML = "<h5>Len Error min:6</h5>"
-      errNameInput.style.margin = "0 1em"
-      errNameInput.style.color = "#EE4444"
-      return
-    }
-    
-    if (password1.length < 8) {
-      passwordInputBox1.style.border = "2px solid #EE4444"
-      errPwInput1.innerHTML = "<h5>Len Error min:8</h5>"
-      errPwInput1.style.margin = "0 1em"
-      errPwInput1.style.color = "#EE4444"
-      
-    } else if (password1 == password2) {
-      db.setItem("user", JSON.stringify({username: nameInput.value, password: password1}))
-      window.location.replace("main/index.html")
-      
+  if (res_username.status) {
+    let res_email = check_email(email)
+    if (res_email.status) {
+      let res_password = check_password(password1, password2)
+      if (res_password.status) {
+        fetch("https://somestore.onrender.com/register/", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({username: username, email: email, password: password})
+        })
+        .then(response => response.json())
+        .then(data => {})
+        return;
+      } else {
+        passwordInputBox1.style.border = "2px solid #EE4444"
+        errPwInput1.innerHTML = `<h5>${res_password.message}</h5>`
+        errPwInput1.style.margin = "0 1em"
+        errPwInput1.style.color = "#EE4444"
+        
+        passwordInputBox2.style.border = "2px solid #EE4444"
+        errPwInput2.innerHTML = `<h5>${res_password.message}</h5>`
+        errPwInput2.style.margin = "0 1em"
+        errPwInput2.style.color = "#EE4444"
+      }
     } else {
-      passwordInputBox1.style.border = "2px solid #EE4444"
-      errPwInput1.innerHTML = "<h5>Passwords do not match</h5>"
-      errPwInput1.style.margin = "0 1em"
-      errPwInput1.style.color = "#EE4444"
-      
-      passwordInputBox2.style.border = "2px solid #EE4444"
-      errPwInput2.innerHTML = "<h5>Passwords do not match</h5>"
-      errPwInput2.style.margin = "0 1em"
-      errPwInput2.style.color = "#EE4444"
+      emailInputBox.style.border = "2px solid #EE4444"
+      errEmailInput.innerHTML = `<h5>${res_email.message}</h5>`
+      errEmailInput.style.margin = "0 1em"
+      errEmailInput.style.color = "#EE4444"
     }
+  } else {
+    nameInputBox.style.border = "2px solid #EE4444"
+    errNameInput.innerHTML = `<h5>${res_username.message}</h5>`
+    errNameInput.style.margin = "0 1em"
+    errNameInput.style.color = "#EE4444"
   }
+  
 })
   
 </script>

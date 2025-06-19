@@ -25,5 +25,17 @@ def search():
     return jsonify({"status": True, "message": "Hello, World"})
 
 
+@app.route("/get_user/")
+def get_user():
+    data = request.args
+    username = data.get("username")
+    if username:
+        user = sql.get_user_by_username(username)
+        if user:
+            return jsonify({"status": True, "id": user[0], "username": user[1], "password": user[3]})
+    
+    return jsonify({"status": False})
+        
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)

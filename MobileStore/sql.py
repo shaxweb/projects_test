@@ -47,6 +47,9 @@ def get_data(id):
     "product": cur.execute("SELECT * FROM product WHERE id = ?", (id,)).fetchone(),
   }
 
+def get_user_by_username(username):
+  return cur.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
+
 
 def create_product(title, description, price):
   cur.execute("INSERT INTO products(title, description, price) VALUES(?,?,?)", (title, description, price))
