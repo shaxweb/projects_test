@@ -48,8 +48,7 @@ def get_products():
                 if products.get(f"product_{i}"):
                     products[f"product_{i}"]["quantity"] += 1
                 else:
-                    products[f"product_{i}"]["data"] = product
-                    products[f"product_{i}"]["quantity"] = 1
+                    products[f"product_{i}"] = {"quantity": 1, "data": product}
     
     return jsonify({"status": True, "data": products})
 
