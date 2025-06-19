@@ -19,7 +19,7 @@ def search():
     
     if query:
         products = sql.get_all_data()["products"]
-        data = scripts.search_products(query, products)
+        data = scripts.search_products(query.lower(), products)
         return jsonify({"status": True, "message": "ul", "data": data})
     return jsonify({"status": True, "message": "Hello, World"})
 
