@@ -14,7 +14,9 @@
     
     <div class="search-container">
       <input type="text" class="search-input" placeholder="Search...">
-      <div class="seatch-results"></div>
+      <div class="products-list">
+        
+      </div>
     </div>
     
   <br><br><br><br><br>
@@ -39,6 +41,7 @@
   </footer>
 
 <script src="../js/check_connection.js"></script>
+<script src="../js/search.js"></script>
 <script>
   const db = localStorage;
   const user = JSON.parse(db.getItem("user")) || null

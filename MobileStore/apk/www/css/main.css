@@ -135,6 +135,7 @@ main {
   padding: .25em;
   border-radius: .25em;
   font-size: 1.25em;
+  color: var(--bg-yellowgreen2);
 }
 
 footer {

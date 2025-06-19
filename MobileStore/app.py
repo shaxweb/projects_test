@@ -13,5 +13,16 @@ def home():
     return jsonify({"status": True, "message": "Hello, Wolrd", "data": products})
 
 
+@app.route("/search/")
+def search():
+    query = request.args.get("q")
+    
+    if query:
+        products = sql.get_all_data()["products"]
+        data = search_products(query, products)
+        return jsonify({"status": True, "message": "ul", "data": data})
+    return jsonify({"status": True, "message": "Hello, World"})
+
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
