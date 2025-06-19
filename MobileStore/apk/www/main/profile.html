@@ -40,7 +40,7 @@
       <div class="tag" onclick="location.replace('index.html')">
         <img src="../img/home.png" alt="">
       </div>
-      <div class="tag" id="tag">
+      <div class="tag" onclick="location.replace('search.html')">
         <img src="../img/search_dark.png" alt="">
       </div>
       <div class="tag">
@@ -54,12 +54,6 @@
   </footer>
 
 <script src="../js/check_connection.js"></script>
-<script>
-  const db = localStorage;
-  const user = JSON.parse(db.getItem("user")) || null
-  
-  if (user == null) {window.location.replace("../login.html")}
-  
-</script>
+<script src="../js/check_user.js"></script>
 </body>
 </html>

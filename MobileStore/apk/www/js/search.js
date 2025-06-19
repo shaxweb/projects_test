@@ -1,23 +1,38 @@
-const apiUrl = "https://somestore.onrender.com/"
+const input = document.querySelector(".search-input");
+const resultsDiv = document.querySelector(".products-list");
+let timeout = null;
 
-const productsList = document.querySelector(".products-list")
-const productBox = document.querySelector(".product-box")
-
-fetch(apiUrl, {method: "GET"})
-.then(response => response.json())
-.then(data => {
-  const results = data.data
-  
-  for (let i of results) {
-    productsList.innerHTML += `
-<div class="product-box">
-  <img src="../img/icons/product.jpg" alt="">
-  <h4 class="product-title">${i[1]}</h4>
-  <div>
-    <h5 class="product-price">${i[3]}</h5>
-    <img src="../img/add_basket_white.png" alt="">
-  </div>
-</div>
-    `
-  }
-})
+input.addEventListener("input", () => {
+  clearTimeout(timeout);
+  timeout = setTimeout(() => {
+    const q = input.value.trim();
+    if (!q) {
+      resultsDiv.innerHTML = "";
+      return;
+    }
+    // encodeURIComponent(q)
+    fetch(`https://somestore.onrender.com/search/?q=${q}`)
+      .then(response => response.json())
+      .then(data => {
+        resultsDiv.innerHTML = "";
+        if (data.data.length == 0) {
+          resultsDiv.innerHTML = "<h2>❌ Ничего не найдено</h2>";
+          return;
+        }
+        
+        data.data.forEach(product => {
+          const div = document.createElement("div");
+          div.className = "product-box";
+          div.innerHTML = `
+              <img src="../img/icons/product.jpg" alt="">
+              <h4 class="product-title">${product[1]}</h4>
+              <div>
+                <h5 class="product-price">$${product[3]}</h5>
+                <img src="../img/add_basket_white.png" alt="">
+              </div>
+              `;
+          resultsDiv.appendChild(div);
+        });
+      });
+  }, 300); // Задержка 300мс — debounce
+});
