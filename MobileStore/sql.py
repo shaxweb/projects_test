@@ -45,8 +45,8 @@ def get_all_data():
 def get_data(id):
   return {
     "user": cur.execute("SELECT * FROM users WHERE id = ?", (id,)).fetchone(),
-    "wait_user": cur.execute("SELECT * FROM wait_user WHERE id = ?", (id,)).fetchone(),
-    "product": cur.execute("SELECT * FROM product WHERE id = ?", (id,)).fetchone(),
+    "wait_user": cur.execute("SELECT * FROM wait_users WHERE id = ?", (id,)).fetchone(),
+    "product": cur.execute("SELECT * FROM products WHERE id = ?", (id,)).fetchone(),
   }
 
 def get_user_by_username(username):

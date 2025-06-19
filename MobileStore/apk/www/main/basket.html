@@ -47,6 +47,7 @@
     fetch(`https://somestore.onrender.com/get_products?products=${products}`)
     .then(response => response.json())
     .then(data => {
+      /*
       products.forEach(product => {
         const div = document.createElement("div");
         div.className = "product-box";
@@ -59,7 +60,8 @@
           </div>
         `
         productsList.appendChild(div);
-      })
+      })*/
+      data.data.forEach(i => {console.log(i)})
     })
   }
 
