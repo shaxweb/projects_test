@@ -122,6 +122,21 @@ main {
   height: 100%;
 }
 
+/* Search styles */
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-input {
+  background: none;
+  border: 2px solid var(--bg-yellowgreen);
+  padding: .25em;
+  border-radius: .25em;
+  font-size: 1.25em;
+}
+
 footer {
   display: flex;
   width: 100%;
