@@ -55,7 +55,7 @@ def get_user_by_email(email):
   return cur.execute("SELECT * FROM users WHERE email = ?", (email,)).fetchone()
 
 
-def create_user(username, email, password):
+def create_wait_user(username, email, password):
   cur.execute("INSERT INTO users(username, email, password) VALUES(?,?,?)", (username, email, password,))
   db.commit()
 
