@@ -111,7 +111,7 @@
     let res_username = check_username(username)
     
     if (res_username.status) {
-      fetch(`https://somestore.onrender.com/get_user?username=${username}`)
+      fetch(`https://somestore.onrender.com/get_user/?username=${username}`)
       .then(response => response.json())
       .then(data => {
         if (data.status) {
