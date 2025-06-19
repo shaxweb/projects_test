@@ -118,6 +118,7 @@
           let res_password = check_password(password, data.user.password)
           if (res_password.status) {
             db.setItem("cur_user", JSON.stringify({id: data.user.id}))
+            window.location.replace("main/index.html")
           } else {
             passwordInputBox.style.border = "2px solid #EE4444"
             errPasswordInput.innerHTML = `<h5>UnCorrect Password</h5>`
