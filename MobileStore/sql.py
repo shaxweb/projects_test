@@ -16,7 +16,9 @@ cur.execute("""
 CREATE TABLE IF NOT EXISTS wait_users(
   id INTEGER PRIMARY KEY,
   username TEXT,
-  email TEXT
+  password TEXT,
+  email TEXT,
+  token TEXT
 )
 """)
 
@@ -54,8 +56,16 @@ def get_user_by_username(username):
 def get_user_by_email(email):
   return cur.execute("SELECT * FROM users WHERE email = ?", (email,)).fetchone()
 
+def get_wait_user_by_token(token):
+  return cur.execute("SELECT * FROM wait_users WHERE token = ?", (token,)).fetchall()
 
-def create_wait_user(username, email, password):
+
+def create_wait_user(username, email, password, token):
+  cur.execute("INSERT INTO users(username, email, password, token) VALUES(?,?,?,?)", (username, email, password, token,))
+  db.commit()
+
+
+def create_user(username, email, password):
   cur.execute("INSERT INTO users(username, email, password) VALUES(?,?,?)", (username, email, password,))
   db.commit()
 

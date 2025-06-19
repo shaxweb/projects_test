@@ -10,8 +10,8 @@ CORS(app)
 @app.route("/")
 def home():
     print("\n\n\nHello, Wolrd!\n\n\n")
-    products = sql.get_all_data()["products"]
-    return jsonify({"status": True, "message": "Hello, Wolrd", "data": products})
+    data = sql.get_all_data()
+    return jsonify({"status": True, "message": "Hello, Wolrd", "data": data})
 
 
 @app.route("/search/")
@@ -45,12 +45,25 @@ def register():
         
         if not sql.get_user_by_username(username):
             if not sql.get_user_by_email(email):
-                sql.create_wait_user(username, email, password)
-                scripts.send_token_to_mail(email)
+                token = scripts.send_token_to_mail(email)
+                sql.create_wait_user(username, email, password, token)
                 return jsonify({"status": True, "message": "Token sended"})
             return jsonify({"status": False, "error": "email"})
         return jsonify({"status": False, "error": "username"})
     return jsonify({"status": True})
+
+
+@app.route("/auth/")
+def auth_func():
+    data = request.args
+    token = data.get("token")
+    if token:
+        user = sql.get_wait_user_by_token(token)
+        if user:
+            sql.create_user(user[1], user[2], user[3])
+            return render("auth.html", status=True, username=user[1])
+    
+    return render("auth.hrml", status=False, error="Token was broken")
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
