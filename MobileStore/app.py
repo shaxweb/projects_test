@@ -37,6 +37,23 @@ def get_user():
     return jsonify({"status": False})
 
 
+@app.route("/get_products/")
+def get_products():
+    data = request.args.get("products")
+    products = {}
+    if data:
+        for i in data:
+            product = sql.get_data()[i]
+            if product:
+                if products.get(f"product_{i}"):
+                    products[f"product_{i}"]["quantity"] += 1
+                else:
+                    products[f"product_{i}"] = product
+                    products[f"product_{i}"]["quantity"] = 1
+    
+    return jsonify({"status": True, "data": products})
+
+
 @app.route("/register/", methods=["GET", "POST"])
 def register():
     if request.method == "POST":

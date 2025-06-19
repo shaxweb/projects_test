@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MobileStore</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <header>
+    <h2>MobileStore</h2>
+  </header>
+  <main>
+    
+    <div class="products-list"></div>
+  
+  <br><br><br><br><br>
+  </main>
+  
+  <footer>
+    <div class="tags">
+      <div class="tag">
+        <img src="../img/home.png" alt="">
+      </div>
+      <div class="tag" onclick="location.replace('search.html')">
+        <img src="../img/search_dark.png" alt="">
+      </div>
+      <div class="tag">
+        <img src="../img/basket_dark.png" alt="">
+        <h5>Basket</h5>
+      </div>
+      <div class="tag" onclick="location.replace('profile.html')">
+        <img src="../img/person_dark.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+<script src="../js/check_connection.js"></script>
+<script src="../js/check_user.js"></script>
+<script>
+  const productsList = document.querySelector(".products-list")
+  
+  let db = localStorage;
+  let products = JSON.parse(db.getItem("basket")) || null
+  if (products == null) {productsList.innerHTML = "<h2>Empty</h2>"; return;}
+  
+  products.forEach(product => {
+    const div = document.createElement("div");
+    div.className = "product-box";
+    div.innerHTML = `
+      <img src="../img/icons/product.jpg" alt="">
+      <h4 class="product-title">${product[1]}</h4>
+      <div>
+        <h5 class="product-price">$${product[3]}</h5>
+        <img src="../img/add_basket_white.png" alt="" onclick="addToCard(${product[0]})">
+      </div>
+    `
+    productsList.appendChild(div);
+  })
+
+</script>
+</body>
+</html>

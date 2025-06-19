@@ -67,13 +67,20 @@
         <h4 class="product-title">${product[1]}</h4>
         <div>
           <h5 class="product-price">$${product[3]}</h5>
-          <img src="../img/add_basket_white.png" alt="">
+          <img src="../img/add_basket_white.png" alt="" onclick="addToCard(${product[0]})">
         </div>
       `
       productsList.appendChild(div);
     })
   })
   
+  let addToCard = (id) => {
+    let db = localStorage;
+    let basket = JSON.parse(db.getItem("basket")) || []
+    basket.push(id)
+    db.setItem("basket", JSON.stringify(basket))
+  }
+
 </script>
 </body>
 </html>
