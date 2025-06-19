@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.shaxcoder.somestore"
-        version="alpha-1"
+        version="1.0-alpha"
         xmlns="http://www.w3.org/ns/widgets"
         xmlns:cdv="http://cordova.apache.org/ns/1.0">
 
   <name>SomeStore</name>
-  <description>Store</description>
+  <description></description>
   <author email="shaxrux243@gmail.com" href="https://shaxweb.github.io/projects">Shaxrux</author>
 
-  <content src="login.html" />
+  <content src="main/index.html" />
   <access origin="*" />
   <allow-navigation href="*" />
   <allow-intent href="*" />
