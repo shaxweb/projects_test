@@ -5,5 +5,10 @@ fetch(apiUrl+"/")
 .then(response => response.json())
 .then(data => {console.log(data.data)})
 
+fetch(apiUrl+"/search?q='i'")
+.then(response => response.json())
+.then(data => {
+  console.log(data.data)
+})
 
 </script>

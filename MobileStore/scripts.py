@@ -23,7 +23,7 @@ def send_token_to_mail(receiver_email):
       server.quit()
       # print("Письмо успешно отправлено!")
   except Exception as e:
-      # print(f"Ошибка при отправке: {e}")
+      print(f"Ошибка при отправке: {e}")
 
 
 def search_products(query, products):
