@@ -30,7 +30,7 @@ header img { width: 30px; }
 
 main {
   background: var(--bg-dark);
-  height: 150vh;
+  height: 10vh;
   border-radius: 2em 2em 0 0; /* 2em 2em 0 0 */
   padding: 1em;
   padding-top: 2em;
