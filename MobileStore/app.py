@@ -37,7 +37,10 @@ def get_user():
     
     elif user_id:
         user = sql.get_data(user_id)["user"]
-        return jsonify({"status": True, "user_data": user})
+        if user:
+            return jsonify({"status": True, "user_data": user})
+        else:
+            return jsonify({"status": False})
 
     return jsonify({"status": False})
 
