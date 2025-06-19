@@ -105,41 +105,38 @@
   })
   
   formButton.addEventListener("click", () => {
+    let db = localStorage;
     let username = nameInput.value
     let password = pwInput.value
     let res_username = check_username(username)
-    let error = null
-    let user_id = null
     
-    if (!res_username.status) {
+    if (res_username.status) {
+      fetch(`https://somestore.onrender.com/get_user?username=${username}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status) {
+          let res_password = check_password(password, data.user.password)
+          if (res_password.status) {
+            db.setItem("cur_user", JSON.stringify({id: data.user.id}))
+          } else {
+            passwordInputBox.style.border = "2px solid #EE4444"
+            errPasswordInput.innerHTML = `<h5>UnCorrect Password</h5>`
+            errPasswordInput.style.margin = "0 1em"
+            errPasswordInput.style.color = "#EE4444"
+          }
+        } else {
+          nameInputBox.style.border = "2px solid #EE4444"
+          errNameInput.innerHTML = `<h5>Username Not Found</h5>`
+          errNameInput.style.margin = "0 1em"
+          errNameInput.style.color = "#EE4444"
+        }
+      })
+    } else {
       nameInputBox.style.border = "2px solid #EE4444"
       errNameInput.innerHTML = `<h5>${res_username.message}</h5>`
       errNameInput.style.margin = "0 1em"
       errNameInput.style.color = "#EE4444"
-      return
-    } else {
-      fetch(`https://somestore.onrender.com/get_user?username=${username}`)
-      .then(response => response.json())
-      .then(data => {
-        if (!data.status) { error = "user not found" }
-        else {
-          let password1 = data.user.password
-          let res_password = check_passord(password, password1)
-          if (!res_password.status) { error = res_password.message }
-          else { user_id = data.user.id }
-        }
-      })
     }
-    if (error != null) {
-      nameInputBox.style.border = "2px solid #EE4444"
-      errNameInput.innerHTML = `<h5>${error}</h5>`
-      errNameInput.style.margin = "0 1em"
-      errNameInput.style.color = "#EE4444"
-      return
-    }
-    
-    db.setItem("cur_user", JSON.stringify({id: user_id}))
-    window.location.replace("main/index.html")
   })
   
 </script>

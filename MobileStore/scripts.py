@@ -21,6 +21,7 @@ def send_token_to_mail(receiver_email):
       server.login(sender_email, sender_password)
       server.sendmail(sender_email, receiver_email, message.as_string())
       server.quit()
+      return token
       # print("Письмо успешно отправлено!")
   except Exception as e:
       print(f"Ошибка при отправке: {e}")

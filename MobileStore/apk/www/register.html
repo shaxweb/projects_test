@@ -157,7 +157,11 @@ formButton.addEventListener("click", () => {
         .then(response => response.json())
         .then(data => {
           if (data.status) {
-            alert("Done")
+            alert("Look the mail")
+            nameInput.value=""
+            emailInput.value=""
+            pwInput1.value=""
+            pwInput2.value=""
           } else {
             if (data.error == "email") {
               emailInputBox.style.border = "2px solid #EE4444"
