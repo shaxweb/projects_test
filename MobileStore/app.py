@@ -40,7 +40,7 @@ def get_user():
 @app.route("/register/", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        data = request.data
+        data = request.get_json()
         username, email, password = data.get("username"), data.get("email"), data.get("password")
         
         if not sql.get_user_by_username(username):
