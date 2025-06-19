@@ -9,13 +9,13 @@ const check_username = (username) => {
   return {status: true, message: "done"}
 }
 
-const check_passord = (password1, password2) => {
+const check_password = (password1, password2) => {
   if (password1.length < 8) { return {status: false, message: "len error"} }
   if (password1 == password2) { return {status: true, message: "done"} }
   else { return {status: false, message: "error not match"} }
 }
 
-const check_mail = (mail) => {
+const check_email = (mail) => {
   if (!mail.includes("@gmail.com")) { return {status: false, message: "uncorrect mail"} }
   return {status: true, message: "done"}
 }

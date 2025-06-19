@@ -50,6 +50,7 @@ def register():
                 return jsonify({"status": True, "message": "Token sended"})
             return jsonify({"status": False, "error": "email"})
         return jsonify({"status": False, "error": "username"})
+    return jsonify({"status": True})
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)

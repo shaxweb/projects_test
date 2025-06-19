@@ -25,7 +25,7 @@
 
       <div class="input-box" id="emailInputBox">
         <img src="img/mail.png" alt="">
-        <input id="emailInput" type="text" placeholder="Email">
+        <input id="emailInput" type="email" placeholder="Email">
       </div>
       <div id="errEmailInput"></div>
       
@@ -152,7 +152,7 @@ formButton.addEventListener("click", () => {
         fetch("https://somestore.onrender.com/register/", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({username: username, email: email, password: password})
+          body: JSON.stringify({username: username, email: email, password: password1})
         })
         .then(response => response.json())
         .then(data => {
