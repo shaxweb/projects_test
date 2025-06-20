@@ -81,10 +81,10 @@ def delete_wait_user(id):
   db.commit()
 
 
-create_product("iPhone", "Phone", 1500)
-create_product("Samsung", "Best Phone", 1200)
-create_product("Nokia", "Phone", 1500)
-create_product("Novey", "Best Phone", 1200)
-create_product("Nivea", "Phone", 1500)
-create_product("BMW", "Best Phone", 1200)
+create_product("iPhone 14", "Apple smartphone", 899)
+create_product("Samsung Galaxy S22", "Android Phone", 799)
+create_product("MacBook Pro", "Apple laptop", 1499)
+create_product("Xiaomi Redmi", "Budget Phone", 299)
+create_product("PlayStation 5", "Gaming Console", 499)
+create_product("AirPods Pro", "Wireless earbuds", 249)
 
