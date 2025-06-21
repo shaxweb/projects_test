@@ -10,6 +10,7 @@ import bot
 app = Flask(__name__)
 render = render_template
 CORS(app)
+images_path = "images"
 
 
 @app.route("/")
