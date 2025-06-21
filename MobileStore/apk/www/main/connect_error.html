@@ -58,6 +58,7 @@
     if (navigator.onLine) {
       fetch("https://somestore.onrender.com/")
       .then(response => {})
+      .then(data => {window.location.replace("index.html")})
       .catch(error => {alert(`Connect error: ${error}`)})
       //window.location.assign("index.html")
     } else { alert("Connect Error") }
