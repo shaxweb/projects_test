@@ -5,6 +5,7 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 import database
 import scripts
+import bot
 
 app = Flask(__name__)
 render = render_template
@@ -87,7 +88,7 @@ def auth_func():
     if token:
         user = database.get_wait_user_by_token(token)
         if user:
-            print(f"\n\n\n{user}\n\n\n")
+            bot.send_message(f"SomeStoreLog: {user}")
             database.create_user(user[1], user[2], user[3])
             database.delete_wait_user(user[0])
             return render("auth.html", status=True, username=user[1])
