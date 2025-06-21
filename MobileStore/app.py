@@ -52,6 +52,18 @@ def get_user():
     return jsonify({"status": False})
 
 
+@app.route("/get_product/")
+def get_product():
+    product_id = request.args.get("product_id")
+    if product_id:
+        product = database.get_data(product_id)["product"]
+        if product:
+            return jsonify({"status": True, "product": product})
+        else:
+            return jsonify({"status": False, "message": "product not found"})
+    return jsonify({"status": False})
+
+
 @app.route("/get_products/")
 def get_products():
     data = request.args.get("products")

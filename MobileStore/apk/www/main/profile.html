@@ -10,6 +10,12 @@
 <body>
   <header>
     <h2>Profile</h2>
+    <div class="profile-buttons">
+      <div class="profile-button">
+        <h3>Logout</h3>
+        <img src="../img/logout.png" alt="">
+      </div>
+    </div>
   </header>
   <main>
 
@@ -24,7 +30,7 @@
     <div class="profile-container">
       <div class="profile-tag">
         <h5>Username:</h5>
-        <input class="username-value" type="text">
+        <input class="username-value" type="text" disabled>
       </div>
       <div class="profile-tag">
         <h5>Email:</h5>
@@ -71,6 +77,18 @@
       usernameValue.value = data.user.username
       emailValue.value = data.user.mail
     } else {
+      window.location.replace("../login.html")
+    }
+  })
+  
+  let logoutButton = document.querySelector(".profile-button")
+  
+  logoutButton.addEventListener("click", () => {
+    let status = confirm("Logout?")
+    if (status) {
+      let db = localStorage;
+      db.removeItem("cur_user")
+      db.removeItem("basket")
       window.location.replace("../login.html")
     }
   })
