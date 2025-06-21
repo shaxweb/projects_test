@@ -40,7 +40,10 @@
 <script>
   const productsList = document.querySelector(".products-list")
   let products = JSON.parse(db.getItem("basket")) || null
+
   if (products == null) {
+    productsList.innerHTML = "<h2>Empty</h2>"
+  } else if (products.length == 0) {
     productsList.innerHTML = "<h2>Empty</h2>"
   } else {
     fetch(`https://somestore.onrender.com/get_products/?products=[${products}]`)

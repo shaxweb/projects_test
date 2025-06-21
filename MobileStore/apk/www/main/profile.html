@@ -5,12 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MobileStore</title>
   <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/loader.css">
 </head>
 <body>
   <header>
     <h2>Profile</h2>
   </header>
   <main>
+
+    <div class="preloader">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
     
     <div class="profile-container">
       <div class="profile-tag">
@@ -18,16 +27,8 @@
         <input class="username-value" type="text">
       </div>
       <div class="profile-tag">
-        <h5>Status:</h5>
-        <input value="Buyer" disabled>
-      </div>
-      <div class="profile-tag">
         <h5>Email:</h5>
         <input class="email-value" disabled>
-      </div>
-      <div class="profile-tag">
-        <h5>Rate:</h5>
-        <input value="Gold Month" disabled>
       </div>
     </div>
     
@@ -59,10 +60,13 @@
   let usernameValue = document.querySelector(".username-value")
   let emailValue = document.querySelector(".email-value")
   let cur_user_data = null
+  let preLoaderBox = document.querySelector(".preloader")
+  preLoaderBox.style.display = "flex"
   
   fetch(`https://somestore.onrender.com/get_user/?id=${cur_user["id"]}`)
   .then(response => response.json())
   .then(data => {
+    preLoaderBox.style.display = "none"
     if (data.status) {
       cur_user_data = data.user_data
       usernameValue.value = data.user_data[1]

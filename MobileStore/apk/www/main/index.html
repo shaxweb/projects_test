@@ -5,12 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MobileStore</title>
   <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/loader.css">
 </head>
 <body>
   <header>
     <h2>MobileStore</h2>
   </header>
   <main>
+    
+    <div class="preloader">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
     
     <div class="categories-list">
       <div class="category">
@@ -50,6 +59,8 @@
 <script src="../js/check_user.js"></script>
 <script>
   const productsList = document.querySelector(".products-list")
+  let preLoaderBox = document.querySelector(".preloader")
+  preLoaderBox.style.display = "flex"
   
   fetch("https://somestore.onrender.com/")
   .then(response => response.json())
@@ -70,6 +81,7 @@
           <img src="../img/add_basket_white.png" alt="" onclick="addToCard(${product[0]})">
         </div>
       `
+      preLoaderBox.style.display = "none"
       productsList.appendChild(div);
     })
   })

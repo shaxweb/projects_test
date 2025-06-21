@@ -56,7 +56,10 @@
   
   document.getElementById("retryConnect").addEventListener("click", () => {
     if (navigator.onLine) {
-      window.location.assign("index.html")
+      fetch("https://somestore.onrender.com/")
+      .then(response => {})
+      .catch(error => {alert(`Connect error: ${error}`)})
+      //window.location.assign("index.html")
     } else { alert("Connect Error") }
   })
 </script>

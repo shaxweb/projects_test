@@ -1,12 +1,16 @@
 const input = document.querySelector(".search-input");
 const resultsDiv = document.querySelector(".products-list");
+let preLoaderBox = document.querySelector(".preloader")
+preLoaderBox.style.display = "none"
 let timeout = null;
 
 input.addEventListener("input", () => {
+  preLoaderBox.style.display = "flex"
   clearTimeout(timeout);
   timeout = setTimeout(() => {
     const q = input.value.trim();
     if (!q) {
+      preLoaderBox.style.display = "none"
       resultsDiv.innerHTML = "";
       return;
     }
@@ -16,6 +20,7 @@ input.addEventListener("input", () => {
       .then(data => {
         resultsDiv.innerHTML = "";
         if (data.data.length == 0) {
+          preLoaderBox.style.display = "none"
           resultsDiv.innerHTML = "<h2>❌ Ничего не найдено</h2>";
           return;
         }
@@ -31,6 +36,7 @@ input.addEventListener("input", () => {
                 <img src="../img/add_basket_white.png" alt="">
               </div>
               `;
+              preLoaderBox.style.display = "none"
           resultsDiv.appendChild(div);
         });
       });
