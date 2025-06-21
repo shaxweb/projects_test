@@ -1,7 +1,8 @@
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 import MobileStore.scripts
-import json, sql
+import .sql
+import json
 
 app = Flask(__name__)
 render = render_template
