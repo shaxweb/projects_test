@@ -37,12 +37,14 @@ def get_user():
     if username:
         user = database.get_user_by_username(username)
         if user:
-            return jsonify({"status": True, "user": {"id": user[0], "username": user[1], "password": user[3]}})
+            return jsonify({"status": True, "user": {"id": user[0], "username": user[1], "password": user[2], "mail": user[3]}})
+        else:
+            return jsonify({"status": False})
     
     elif user_id:
         user = database.get_data(user_id)["user"]
         if user:
-            return jsonify({"status": True, "user_data": user})
+            return jsonify({"status": True, "user": {"id": user[0], "username": user[1], "password": user[2], "mail": user[3]}})
         else:
             return jsonify({"status": False})
 

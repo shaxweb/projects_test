@@ -68,9 +68,8 @@
   .then(data => {
     preLoaderBox.style.display = "none"
     if (data.status) {
-      cur_user_data = data.user_data
-      usernameValue.value = data.user_data[1]
-      emailValue.value = data.user_data[2]
+      usernameValue.value = data.user.username
+      emailValue.value = data.user.mail
     } else {
       window.location.replace("../login.html")
     }

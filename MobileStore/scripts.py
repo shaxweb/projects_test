@@ -27,6 +27,26 @@ def send_token_to_mail(receiver_email):
       print(f"Ошибка при отправке: {e}")
 
 
+def send_mail_register_log(username, user_mail):
+    message = MIMEMultipart()
+    message["From"] = sender_email
+    message["To"] = "shaxrux243@gmail.com"
+    message["Subject"] = "Регистрация!"
+    body = f"New User registered. Username: {username} and mail: {user_mail}"
+    message.attach(MIMEText(body, "plain"))
+    
+    try:
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login(sender_email, sender_password)
+        server.sendmail(sender_email, receiver_email, message.as_string())
+        server.quit()
+        return token
+      # print("Письмо успешно отправлено!")
+    except Exception as e:
+        print(f"Ошибка при отправке: {e}")
+
+
 def search_products(query, products):
     results = []
 
