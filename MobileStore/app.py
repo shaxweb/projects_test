@@ -89,7 +89,7 @@ def auth_func():
         user = database.get_wait_user_by_token(token)
         if user:
             bot.send_message(f"SomeStoreLog: {user}")
-            database.create_user(user[1], user[2], user[3])
+            database.create_user(user[1], user[3], user[2])
             database.delete_wait_user(user[0])
             return render("auth.html", status=True, username=user[1])
     
