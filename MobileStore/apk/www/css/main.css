@@ -166,6 +166,24 @@ main {
   color: var(--bg-yellowgreen2);
 }
 
+/* View Product Styles */
+
+.view-product {
+  height: 100vh;
+}
+
+.view-product .imagesList {
+  display: flex;
+  overflow: auto;
+  gap: .5em
+}
+
+.view-product .imagesList img {
+  height: 200px;
+  width: 110%;
+  border: 2px solid var(--bg-yellowgreen);
+}
+
 footer {
   display: flex;
   width: 100%;

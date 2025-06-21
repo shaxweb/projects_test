@@ -106,6 +106,7 @@ def auth_func():
             bot.send_message(f"SomeStoreLog: {user}")
             database.create_user(user[1], user[3], user[2])
             database.delete_wait_user(user[0])
+            scripts.send_mail_register_log(user[1], user[3])
             return render("auth.html", status=True, username=user[1])
     
     return render("auth.html", status=False, error="Token was broken", data=data)

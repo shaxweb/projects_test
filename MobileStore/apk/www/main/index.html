@@ -73,6 +73,7 @@
     data.data["products"].forEach(product => {
     const div = document.createElement("div");
       div.className = "product-box";
+      div.onclick = () => openProduct(product[0])
       div.innerHTML = `
         <img src="../img/icons/product.jpg" alt="">
         <h4 class="product-title">${product[1]}</h4>
@@ -91,6 +92,12 @@
     let basket = JSON.parse(db.getItem("basket")) || []
     basket.push(id)
     db.setItem("basket", JSON.stringify(basket))
+  }
+  
+  let openProduct = (id) => {
+    let sdb = sessionStorage;
+    sdb.setItem("product_id", id)
+    window.location.href = "product_view.html"
   }
 
 </script>

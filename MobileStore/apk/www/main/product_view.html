@@ -54,13 +54,25 @@
 <script src="../js/check_connection.js"></script>
 <script src="../js/check_user.js"></script>
 <script>
+  let productBody = document.querySelector(".view-product .body")
   let preLoaderBox = document.querySelector(".preloader")
   preLoaderBox.style.display = "flex"
   
   let sdb = sessionStorage;
   let product_id = sdb.getItem("product_id") || null
   
-  
+  fetch(`https://somestore.onrender.com/get_product?product_id=${product_id}`)
+  .then(response => response.json())
+  .then(data => {
+    preLoaderBox.style.display = "none"
+    if (data.status) {
+      productBody.innerHTML = `
+      <h2>${data.product[1]}</h2>
+      <pre>${data.product[2]}</pre>
+
+      `
+    }
+  })
   
 </script>
 </body>
