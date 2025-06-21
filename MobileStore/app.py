@@ -95,7 +95,7 @@ def auth_func():
             database.delete_wait_user(user[0])
             return render("auth.html", status=True, username=user[1])
     
-    return render("auth.html", status=False, error="Token was broken")
+    return render("auth.html", status=False, error="Token was broken", data=data)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
