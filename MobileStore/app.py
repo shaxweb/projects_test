@@ -1,6 +1,10 @@
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
-import database, scripts, json
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+import database
+import scripts
 
 app = Flask(__name__)
 render = render_template
@@ -9,7 +13,6 @@ CORS(app)
 
 @app.route("/")
 def home():
-    print("\n\n\nHello, Wolrd!\n\n\n")
     data = database.get_all_data()
     return jsonify({"status": True, "message": "Hello, Wolrd", "data": data})
 
