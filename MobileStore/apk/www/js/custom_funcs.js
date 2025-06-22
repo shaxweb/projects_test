@@ -9,3 +9,11 @@ const customAlert = (message) => {
   alertContainer.appendChild(alertBox)
   document.body.appendChild(alertContainer)
 }
+
+const customDismissalBox = (message) => {
+  let dismissalBox = document.createElement("div")
+  dismissalBox.className = "customDismissalBox"
+  dismissalBox.innerText = message
+  document.body.appendChild(dismissalBox)
+  setTimeout(() => {dismissalBox.style.display = "none"}, 5000)
+}

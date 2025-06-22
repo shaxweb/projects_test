@@ -203,6 +203,24 @@ main {
   backdrop-filter: blur(1em);
 }
 
+.customDismissalBox {
+  position: fixed;
+  background: #FFFFFF2B;
+  border-bottom: 2px solid #FFFFFF4A;
+  top: -100px;
+  width: 100%;
+  margin: auto;
+  animation: 4s dismissalAnim forwards;
+  transition: all .5s ease;
+  padding: 1em;
+  backdrop-filter: blur(1em);
+}
+
+@keyframes dismissalAnim {
+  0%, 100% {transform: translate(0, 0);}
+  50% {transform: translate(0, 100px);}
+}
+
 footer {
   display: flex;
   width: 100%;
