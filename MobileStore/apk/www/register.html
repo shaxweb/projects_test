@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>MobileStore</title>
   <link rel="stylesheet" href="css/start-form.css">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
   
@@ -55,6 +56,7 @@
 
 <script src="js/check_conn.js"></script>
 <script src="js/check_data.js"></script>
+<script src="js/custom_funcs.js"></script>
 <script>
   const nameInputBox = document.getElementById("nameInputBox")
   const nameInput = document.getElementById("nameInput")
@@ -158,7 +160,7 @@ formButton.addEventListener("click", () => {
         .then(response => response.json())
         .then(data => {
           if (data.status) {
-            alert("Look the mail")
+            customAlert("Look the mail")
             formButton.innerText = "Log In"
             nameInput.value=""
             emailInput.value=""

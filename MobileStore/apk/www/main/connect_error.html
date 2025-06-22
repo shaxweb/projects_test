@@ -53,7 +53,7 @@
 
 <script src="../js/custom_funcs.js"></script>
 <script>
-  window.addEventListener("online", () => {window.history.back()})
+  window.addEventListener("online", () => {window.location.replace("index.html")})
   
   document.getElementById("retryConnect").addEventListener("click", () => {
     if (navigator.onLine) {
