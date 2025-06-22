@@ -71,7 +71,7 @@ def send_token_to_mail(username, user_mail):
     message["Subject"] = "Подтверждение аккаунта"
 
     # Загружаем HTML-шаблон из файла
-    with open("templates/send_mail.html", "r", encoding="utf-8") as f:
+    with open("MobileStore/templates/send_mail.html", "r", encoding="utf-8") as f:
         html_template = f.read()
 
     # Подставляем переменные в шаблон
