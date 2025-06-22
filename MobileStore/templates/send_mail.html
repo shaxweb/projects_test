@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg-yellowgreen: #D7FC70;
+      --bg-yellowgreen2: #C3E366;
+      --bg-dark: #111111;
+      --bg-dark2: #232323;
+      --border: #636363;
+      --success-color: #28AE29;
+      --warning-color: #FEC629;
+      --error-color: #EE4444;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-dark);
+      color: #ffffff;
+      padding: 40px 20px;
+    }
+
+    .email-container {
+      max-width: 600px;
+      margin: auto;
+      background-color: var(--bg-dark2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+    }
+
+    .header {
+      background: linear-gradient(90deg, var(--bg-yellowgreen), var(--bg-yellowgreen2));
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      color: #111;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .content {
+      padding: 20px 0;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 14px 30px;
+      background-color: var(--success-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 12px;
+      color: #999;
+      text-align: center;
+    }
+
+    a {
+      color: var(--warning-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="header">
+      <h1>Подтвердите ваш аккаунт</h1>
+    </div>
+    <div class="content">
+      <p>Здравствуйте!</p>
+      <p>Спасибо за регистрацию в нашем сервисе. Для завершения процесса, пожалуйста, подтвердите свой адрес электронной почты, нажав на кнопку ниже:</p>
+      <a href="https://example.com/confirm?token=ВАШ_ТОКЕН" class="button">Подтвердить аккаунт</a>
+      <p>Если вы не регистрировались, просто проигнорируйте это письмо.</p>
+    </div>
+    <div class="footer">
+      © 2025 SomeStore. Все права защищены.
+    </div>
+  </div>
+</body>
+</html>

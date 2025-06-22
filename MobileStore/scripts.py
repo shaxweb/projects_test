@@ -6,7 +6,7 @@ sender_email = "shaxrux243@gmail.com"
 sender_password = "ojfb hvou npgr qfhi"  # Используйте пароль приложения, а не обычный!
 
 
-def send_token_to_mail(receiver_email):
+def send_token_to_mail_old(receiver_email):
   token = secrets.token_hex(16)
   message = MIMEMultipart()
   message["From"] = sender_email
@@ -61,3 +61,32 @@ def search_products(query, products):
                 results.append(row)
 
     return results
+
+
+def send_token_to_mail(username, user_mail):
+    token = secrets.token_hex(16)
+    message = MIMEMultipart("alternative")
+    message["From"] = sender_email
+    message["To"] = user_mail
+    message["Subject"] = "Подтверждение аккаунта"
+
+    # Загружаем HTML-шаблон из файла
+    with open("templates/send_mail.html", "r", encoding="utf-8") as f:
+        html_template = f.read()
+
+    # Подставляем переменные в шаблон
+    html_body = html_template.replace("{{USERNAME}}", username).replace("{{TOKEN_LINK}}", f"https://example.com/confirm?token={token}")
+
+    # Создаём MIME объект
+    mime_html = MIMEText(html_body, "html")
+    message.attach(mime_html)
+
+    try:
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login(sender_email, sender_password)
+        server.sendmail(sender_email, user_mail, message.as_string())
+        server.quit()
+        return token
+    except Exception as e:
+        print(f"Ошибка при отправке: {e}")

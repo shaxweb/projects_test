@@ -159,6 +159,7 @@ formButton.addEventListener("click", () => {
         .then(data => {
           if (data.status) {
             alert("Look the mail")
+            formButton.innerText = "Log In"
             nameInput.value=""
             emailInput.value=""
             pwInput1.value=""
