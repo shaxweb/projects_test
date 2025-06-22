@@ -29,11 +29,11 @@ input.addEventListener("input", () => {
           const div = document.createElement("div");
           div.className = "product-box";
           div.innerHTML = `
-              <img src="../img/icons/product.jpg" alt="">
-              <h4 class="product-title">${product[1]}</h4>
+              <img src="../img/icons/product.jpg" alt="" onclick="openProduct(${product[0]})">
+              <h4 class="product-title" onclick="openProduct(${product[0]})">${product[1]}</h4>
               <div>
                 <h5 class="product-price">$${product[3]}</h5>
-                <img src="../img/add_basket_white.png" alt="">
+                <img src="../img/add_basket_white.png" alt="" onclick="addToCard(${product[0]})">
               </div>
               `;
               preLoaderBox.style.display = "none"
@@ -42,3 +42,16 @@ input.addEventListener("input", () => {
       });
   }, 300); // Задержка 300мс — debounce
 });
+
+let addToCard = (id) => {
+  let db = localStorage;
+  let basket = JSON.parse(db.getItem("basket")) || []
+  basket.push(id)
+  db.setItem("basket", JSON.stringify(basket))
+}
+  
+let openProduct = (id) => {
+  let sdb = sessionStorage;
+  sdb.setItem("product_id", id)
+  window.location.href = "product_view.html"
+}
