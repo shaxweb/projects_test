@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Starter</title>
+  <link rel="stylesheet" href="css/loader.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+    <div class="preloader">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+<script src="js/check_conn.js"></script>
+<script>
+  let db = localStorage;
+  let cur_user = db.getItem("cur_user") || null
+  
+  if (cur_user == null) {window.location.replace("login.html")}
+  else {
+    fetch(`https://somestore.onrender.com/get_user/?id=${cur_user["id"]}`)
+    .then(response => response.json())
+    .then(data => {
+      if (!data.status) {
+        window.location.replace("login.html")
+      } else {
+        window.location.replace("main/index.html")
+      }
+    })
+  }
+  
+</script>
+</body>
+</html>
