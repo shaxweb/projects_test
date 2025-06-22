@@ -89,8 +89,12 @@ def register():
         if not database.get_user_by_username(username):
             if not database.get_user_by_email(email):
                 token = scripts.send_token_to_mail(username, email)
-                database.create_wait_user(username, email, password, token)
-                return jsonify({"status": True, "message": "Token sended"})
+                if token["status"]:
+                    database.create_wait_user(username, email, password, token["token"])
+                    return jsonify({"status": True, "message": "Token sended"})
+                else:
+                    bot.send_message(f"error: {token["error"]}")
+                    return jsonify({"status": False})
             return jsonify({"status": False, "error": "email"})
         return jsonify({"status": False, "error": "username"})
     return jsonify({"status": True})

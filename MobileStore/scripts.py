@@ -75,7 +75,7 @@ def send_token_to_mail(username, user_mail):
         html_template = f.read()
 
     # Подставляем переменные в шаблон
-    html_body = html_template.replace("{{USERNAME}}", username).replace("{{TOKEN_LINK}}", f"https://somestore.onrender.com/auth?token={token}")
+    html_body = html_template.replace("{{TOKEN_LINK}}", f"https://somestore.onrender.com/auth?token={token}")
 
     # Создаём MIME объект
     mime_html = MIMEText(html_body, "html")
@@ -87,6 +87,6 @@ def send_token_to_mail(username, user_mail):
         server.login(sender_email, sender_password)
         server.sendmail(sender_email, user_mail, message.as_string())
         server.quit()
-        return token
+        return {"status": True, "token": token}
     except Exception as e:
-        print(f"Ошибка при отправке: {e}")
+        return {"status": False, "error": e}
