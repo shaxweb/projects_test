@@ -75,7 +75,7 @@ def send_token_to_mail(username, user_mail):
         html_template = f.read()
 
     # Подставляем переменные в шаблон
-    html_body = html_template.replace("{{USERNAME}}", username).replace("{{TOKEN_LINK}}", f"https://example.com/confirm?token={token}")
+    html_body = html_template.replace("{{USERNAME}}", username).replace("{{TOKEN_LINK}}", f"https://somestore.onrender.com/auth?token={token}")
 
     # Создаём MIME объект
     mime_html = MIMEText(html_body, "html")
