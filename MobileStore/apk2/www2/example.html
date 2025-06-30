@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Store</title>
+    <style>
+        :root {
+          --bg-yellowgreen: #D7FC70;
+          --bg-yellowgreen2: #C3E366;
+          --bg-dark: #111111;
+          --bg-dark2: #232323;
+          --border: #636363;
+          --success-color: #28AE29;
+          --warning-color: #FEC629;
+          --error-color: #EE4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: var(--bg-dark2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--bg-yellowgreen);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-icons i {
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .search-bar {
+            display: flex;
+            margin: 20px 0;
+            background-color: var(--bg-dark2);
+            border-radius: 30px;
+            padding: 10px 15px;
+            align-items: center;
+        }
+
+        .search-bar input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            outline: none;
+        }
+
+        .search-bar i {
+            color: var(--border);
+        }
+
+        .categories {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .category {
+            background-color: var(--bg-dark2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .category.active {
+            background-color: var(--bg-yellowgreen);
+            color: var(--bg-dark);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .product-card {
+            background-color: var(--bg-dark2);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            color: var(--bg-yellowgreen);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .add-to-cart {
+            background-color: var(--bg-yellowgreen);
+            color: var(--bg-dark);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* User Profile Page */
+        .profile-page {
+            display: none;
+        }
+
+        .profile-header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid var(--bg-yellowgreen);
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .profile-email {
+            color: var(--border);
+            margin-bottom: 20px;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--bg-yellowgreen);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--border);
+        }
+
+        .profile-menu {
+            background-color: var(--bg-dark2);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item i {
+            color: var(--border);
+        }
+
+        .logout-btn {
+            background-color: var(--error-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--bg-dark2);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .nav-item i {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .nav-item.active i {
+            color: var(--bg-yellowgreen);
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Main Store Page -->
+    <div id="store-page" class="container">
+        <header>
+            <div class="logo">MobileStore</div>
+            <div class="nav-icons">
+                <i class="fas fa-search"></i>
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+        </header>
+
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search for mobiles...">
+        </div>
+
+        <div class="categories">
+            <div class="category active">All</div>
+            <div class="category">Smartphones</div>
+            <div class="category">Tablets</div>
+            <div class="category">Accessories</div>
+            <div class="category">Wearables</div>
+            <div class="category">Deals</div>
+        </div>
+
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x200?text=iPhone+13" alt="iPhone 13" class="product-image">
+                <div class="product-info">
+                    <div class="product-title">iPhone 13 Pro</div>
+                    <div class="product-price">$999</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x200?text=Samsung+S22" alt="Samsung S22" class="product-image">
+                <div class="product-info">
+                    <div class="product-title">Samsung Galaxy S22</div>
+                    <div class="product-price">$799</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x200?text=Google+Pixel+6" alt="Google Pixel 6" class="product-image">
+                <div class="product-info">
+                    <div class="product-title">Google Pixel 6</div>
+                    <div class="product-price">$599</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x200?text=OnePlus+9" alt="OnePlus 9" class="product-image">
+                <div class="product-info">
+                    <div class="product-title">OnePlus 9 Pro</div>
+                    <div class="product-price">$899</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x200?text=AirPods+Pro" alt="AirPods Pro" class="product-image">
+                <div class="product-info">
+                    <div class="product-title">AirPods Pro</div>
+                    <div class="product-price">$249</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x200?text=Apple+Watch" alt="Apple Watch" class="product-image">
+                <div class="product-info">
+                    <div class="product-title">Apple Watch Series 7</div>
+                    <div class="product-price">$399</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Profile Page -->
+    <div id="profile-page" class="container profile-page">
+        <div class="profile-header">
+            <img src="https://via.placeholder.com/150?text=User" alt="Profile Picture" class="profile-pic">
+            <div class="profile-name">John Doe</div>
+            <div class="profile-email">john.doe@example.com</div>
+        </div>
+
+        <div class="profile-stats">
+            <div class="stat-item">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Orders</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Wishlist</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Reviews</div>
+            </div>
+        </div>
+
+        <div class="profile-menu">
+            <div class="menu-item">
+                <span><i class="fas fa-user"></i> Edit Profile</span>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="menu-item">
+                <span><i class="fas fa-map-marker-alt"></i> Addresses</span>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="menu-item">
+                <span><i class="fas fa-credit-card"></i> Payment Methods</span>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="menu-item">
+                <span><i class="fas fa-history"></i> Order History</span>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="menu-item">
+                <span><i class="fas fa-heart"></i> Wishlist</span>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+
+        <button class="logout-btn">Logout</button>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="showStorePage()">
+            <i class="fas fa-home"></i>
+            <div>Home</div>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-search"></i>
+            <div>Search</div>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-shopping-cart"></i>
+            <div>Cart</div>
+        </div>
+        <div class="nav-item" onclick="showProfilePage()">
+            <i class="fas fa-user"></i>
+            <div>Profile</div>
+        </div>
+    </div>
+
+    <script>
+        function showStorePage() {
+            document.getElementById('store-page').style.display = 'block';
+            document.getElementById('profile-page').style.display = 'none';
+            updateNavIcons('home');
+        }
+
+        function showProfilePage() {
+            document.getElementById('store-page').style.display = 'none';
+            document.getElementById('profile-page').style.display = 'block';
+            updateNavIcons('profile');
+        }
+
+        function updateNavIcons(activePage) {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                const icon = item.querySelector('i');
+                if ((activePage === 'home' && icon.classList.contains('fa-home')) || 
+                    (activePage === 'profile' && icon.classList.contains('fa-user'))) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize the page
+        showStorePage();
+    </script>
+</body>
+</html>

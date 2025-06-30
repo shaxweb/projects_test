@@ -1,0 +1,70 @@
+* {margin : 0; padding: 0; outline: 0;}
+
+:root {
+  --bg-blur: #EAEAEA94;
+  --bg-blur-border: #FFFFFF94;
+  --bg-icon: #FFFFFFB3;
+  --txt-color: #1A1A1A;
+}
+
+body {
+  background: url("bg.png") center center no-repeat;
+  background-position: cover;
+  height: 100vh;
+}
+
+header {
+  background: var(--bg-blur);
+  padding: .5em;
+  border-bottom: 2px solid var(--bg-blur-border);
+}
+
+i {color: var(--bg-icon)}
+
+main {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.box {
+  padding: 1em;
+  position: relative;
+  background: url("bg.png");
+  backdrop-filter: blur(1em);
+  border: 2px solid var(--bg-blur-border);
+  border-radius: 2em;
+  height: 150px;
+  color: var(--txt-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  backdrop-filter: blur(1em);
+  overflow: hidden;
+  box-shadow: 0 0 16px var(--bg-blur);
+  transition: all .1s ease;
+  margin: 1em 0;
+}
+
+.box:active {
+  transform: scale(.95);
+}
+
+.box span {
+  font-size: 1.4em;
+}
+
+.box span h1 {
+  font-weight: 300;
+}
+
+.box .fas {
+  position: absolute;
+  font-size: 130px;
+  z-index: -1;
+  bottom: 15px; right: 24px;
+  filter: drop-shadow(0 0 10px var(--bg-icon));
+  
+  font-size: 230px;
+  top: -10px; right: -50px;
+}
